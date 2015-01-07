@@ -26,11 +26,10 @@ int main() {
     }
     for (int i = 1; i <= m; ++i) {
       scanf("%d", &num);
-      int *stu = new int[num]; // YY出来的~~~
+      int *stu = new int[num];  // YY出来的~~~
       for (int j = 0; j < num; ++j) {
         scanf("%d", &stu[j]);
-        if (j != 0)
-          join(stu[j - 1], stu[j]);
+        if (j != 0) join(stu[j - 1], stu[j]);
       }
       delete (stu);
     }
