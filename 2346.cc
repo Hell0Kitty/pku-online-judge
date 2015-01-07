@@ -17,7 +17,6 @@ void iterate(int currentdigit, int currentsum) {
 
   for (int i = 0; i <= 9; i++) {
     if (currentsum >= i) {
-
       iterate(currentdigit + 1, currentsum - i);
     }
   }
