@@ -23,8 +23,7 @@ int main() {
     }
     memset(d, 0, sizeof(d));
     memset(use, 0, sizeof(use));
-    for (i = 1; i <= n; i++)
-      d[i] = f[1][i];
+    for (i = 1; i <= n; i++) d[i] = f[1][i];
     use[1] = 1;
     for (k = 1; k <= n - 1; k++) {
       max = 0;
