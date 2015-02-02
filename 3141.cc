@@ -25,8 +25,7 @@ int solve() {
   sort(p + 1, p + 1 + n);
   sort(y + 1, y + 1 + n);
   m = unique(y + 1, y + 1 + n) - y - 1;
-  if (m <= 2)
-    return n;
+  if (m <= 2) return n;
 
   int ans = 0;
 
@@ -40,14 +39,11 @@ int solve() {
           on2[k] = on[k] = 0;
           lef[k] = k == 1 ? 0 : lef[k - 1] + on2[k - 1] - on[k - 1];
         }
-        if (p[i].y > ymin && p[i].y < ymax)
-          on[k]++;
-        if (p[i].y >= ymin && p[i].y <= ymax)
-          on2[k]++;
+        if (p[i].y > ymin && p[i].y < ymax) on[k]++;
+        if (p[i].y >= ymin && p[i].y <= ymax) on2[k]++;
       }
 
-      if (k <= 2)
-        return n;
+      if (k <= 2) return n;
       // ans=on2[j]+lef[j]-(lef[i]-on[i])  j means right and i mean lef
       // ans=on2[j]+lef[j]+on[i]-lef[i]
       int M = 0;
