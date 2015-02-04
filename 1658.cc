@@ -27,7 +27,7 @@ int main(int argc, char const *argv[]) {
       cout << a << " " << b << " " << c << " " << d << " " << d + (b - a)
            << endl;
     } else {
-      cout << a << " " << b << " " << c << " " << d << " " << d * (b / a)
+      cout << a << " " << b << " " << c << " " << d << " " << d *(b / a)
            << endl;
     }
   }
