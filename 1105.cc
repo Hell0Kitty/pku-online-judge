@@ -28,6 +28,6 @@ int main() {
       printf("%c", nTerNode[nIndex]);
     }
     printf("\n\n");
-    }
-    return 0;
+  }
+  return 0;
 }
