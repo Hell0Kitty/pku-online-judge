@@ -32,10 +32,9 @@ int main() {
     b[1][0] = 0;
     b[1][1] = 1;
 
-    for (; n > 0; n = n >> 1, js(a, a)) //短小精悍呀、呵呵
-      if (n & 1)
-        js(b, a);
+    for (; n > 0; n = n >> 1, js(a, a))  //短小精悍呀、呵呵
+      if (n & 1) js(b, a);
     printf("%d\n", b[0][1]);
   }
-    return 0;
+  return 0;
 }
