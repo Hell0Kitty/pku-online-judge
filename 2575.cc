@@ -20,8 +20,7 @@ int main() {
     }
 
     for (i = 1; i < n; i++) {
-      if (dif[i] == 0)
-        break;
+      if (dif[i] == 0) break;
     }
 
     if (i == n)
