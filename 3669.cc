@@ -75,15 +75,11 @@ int main(int argc, char *argv[]) {
       }
     }
   }
-  if (map[0][0] == 0)
-  {
+  if (map[0][0] == 0) {
     cout << -1 << endl;
-  }
-  else
-  {
+  } else {
     cout << bfs() << endl;
   }
-
 
   return 0;
 }
