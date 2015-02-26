@@ -10,11 +10,9 @@ bool used[64];
 
 bool compare(int a, int b) { return a > b; }
 
-bool dfs(
-    int cur, int left,
-    int level) {  // cur:
-                  // 当前已经计算的木棒编号，left:该段还剩的长度，level:已经成功的木棒数
-  if (left == 0) {  //匹配一根木棒成功
+bool dfs(int cur, int left, int level) {  // cur:
+                                          // 当前已经计算的木棒编号，left:该段还剩的长度，level:已经成功的木棒数
+  if (left == 0) {                        //匹配一根木棒成功
     if (level == num - 2) return true;
     for (cur = 0; used[cur]; cur++)
       ;
@@ -60,7 +58,7 @@ int main() {
     }
     if (!end) printf("%d\n", sum);
     memset(used, 0, sizeof(used));
-    }
-    //system("pause");
-    return 0;
+  }
+  // system("pause");
+  return 0;
 }
