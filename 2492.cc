@@ -13,7 +13,6 @@ int main() {
   queue<abc> que;
   scanf("%d", &t);
   for (k = 1; k <= t; k++) {
-
     scanf("%d%d", &nbug, &nint);
     for (i = 0; i <= nbug; i++) {
       f[i][0] = 0;
@@ -26,8 +25,7 @@ int main() {
     }
     sus = false;
     for (j = 1; j <= nbug && !sus; j++) {
-      if (bug[j] != -1)
-        continue;
+      if (bug[j] != -1) continue;
       tmp.j = j;
       tmp.level = 0;
       que.push(tmp);
@@ -52,12 +50,10 @@ int main() {
         } else {
           sus = true;
         }
-        if (sus)
-          break;
+        if (sus) break;
       }
     }
-    while (!que.empty())
-      que.pop();
+    while (!que.empty()) que.pop();
     if (sus)
       printf("Scenario #%d:\nSuspicious bugs found!\n\n", k);
     else
