@@ -5,9 +5,9 @@ using namespace std;
 const int MAXN = 100000;
 int num[MAXN];
 struct Node {
-  int l, r;       //区间的左右端点
-  long long nSum; //区间上的和
-  long long Inc;  //区间增量的累加
+  int l, r;        //区间的左右端点
+  long long nSum;  //区间上的和
+  long long Inc;   //区间增量的累加
 } segTree[MAXN * 3];
 void Build(int i, int l, int r) {
   segTree[i].l = l;
@@ -22,7 +22,7 @@ void Build(int i, int l, int r) {
   Build(i << 1 | 1, mid + 1, r);
   segTree[i].nSum = segTree[i << 1].nSum + segTree[i << 1 | 1].nSum;
 }
-void Add(int i, int a, int b, long long c) //在结点i的区间（a,b）上增加c
+void Add(int i, int a, int b, long long c)  //在结点i的区间（a,b）上增加c
 {
   if (segTree[i].l == a && segTree[i].r == b) {
     segTree[i].Inc += c;
@@ -39,7 +39,7 @@ void Add(int i, int a, int b, long long c) //在结点i的区间（a,b）上增�
     Add(i << 1 | 1, mid + 1, b, c);
   }
 }
-long long Query(int i, int a, int b) //查询a-b的总和
+long long Query(int i, int a, int b)  //查询a-b的总和
 {
   if (segTree[i].l == a && segTree[i].r == b) {
     return segTree[i].nSum + (b - a + 1) * segTree[i].Inc;
@@ -62,8 +62,7 @@ int main() {
   int a, b, c;
   char ch;
   while (scanf("%d%d", &n, &q) != EOF) {
-    for (i = 1; i <= n; i++)
-      scanf("%d", &num[i]);
+    for (i = 1; i <= n; i++) scanf("%d", &num[i]);
     Build(1, 1, n);
     for (i = 1; i <= q; i++) {
       cin >> ch;
@@ -73,8 +72,8 @@ int main() {
       } else {
         scanf("%d%d", &a, &b);
         printf("%lld\n", Query(1, a, b));
-            }
-        }
+      }
     }
-    return 0;
+  }
+  return 0;
 }
