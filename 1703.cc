@@ -30,12 +30,11 @@ void Union_Set(int a, int b) {
   fb = Find_Set(b);
   if (fa != fb) {
     father[fa] = fb;
-    _rank[fa] = (_rank[a] + _rank[b]) % 2; // fa结点以下的结点的_rank不需要改
+    _rank[fa] = (_rank[a] + _rank[b]) % 2;  // fa结点以下的结点的_rank不需要改
   }
 }
 
 int main() {
-
   int T, N, M;
   char ch;
   int a, b, fa, fb;
@@ -62,5 +61,5 @@ int main() {
       }
     }
   }
-    return 0;
+  return 0;
 }
