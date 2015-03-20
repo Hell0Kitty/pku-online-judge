@@ -19,8 +19,7 @@ int bfs() {
   while (1) {
     now = queue[out++];
 
-    if (now.x == K)
-      return now.min;
+    if (now.x == K) return now.min;
     if (now.x + 1 <= 100000 && !flag[now.x + 1]) {
       queue[in].x = now.x + 1;
       queue[in++].min = now.min + 1;
