@@ -27,8 +27,7 @@ int main(int argc, char const *argv[]) {
           break;
         }
       }
-      if (curb >= lenb)
-        break;
+      if (curb >= lenb) break;
     }
     if (curb >= lenb) {
       if (cura >= lena)
