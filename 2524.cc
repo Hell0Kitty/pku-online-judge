@@ -12,16 +12,14 @@ void Init(int n) {
 }
 
 int Find_Set(int x) {
-  if (x != father[x])
-    father[x] = Find_Set(father[x]);
+  if (x != father[x]) father[x] = Find_Set(father[x]);
   return father[x];
 }
 
 void Union_Set(int x, int y) {
   x = Find_Set(x);
   y = Find_Set(y);
-  if (x == y)
-    return;
+  if (x == y) return;
   if (rank[x] >= rank[y]) {
     father[y] = x;
     rank[x] += rank[y];
@@ -38,8 +36,7 @@ int main() {
   int num = 1;
   while (1) {
     cin >> n >> m;
-    if (!n && !m)
-      break;
+    if (!n && !m) break;
     Init(n);
     for (i = 0; i < m; i++) {
       cin >> x >> y;
@@ -47,8 +44,7 @@ int main() {
     }
     c = 0;
     for (i = 1; i <= n; i++) {
-      if (i == father[i])
-        c++;
+      if (i == father[i]) c++;
     }
     cout << "Case " << num << ": " << c << endl;
     num++;
