@@ -20,8 +20,7 @@ struct BigInt {
     memcpy(Data, V.Data, Len * sizeof *Data);
   }
   BigInt(int V) : Len(0) {
-    for (; V > 0; V /= Base)
-      Data[Len++] = V % Base;
+    for (; V > 0; V /= Base) Data[Len++] = V % Base;
   }
   BigInt &operator=(const BigInt &V) {
     Len = V.Len;
@@ -36,10 +35,8 @@ BigInt operator+(const BigInt &A, const BigInt &B) {
   int i, Carry(0);
   BigInt R;
   for (i = 0; i < A.Len || i < B.Len || Carry > 0; i++) {
-    if (i < A.Len)
-      Carry += A[i];
-    if (i < B.Len)
-      Carry += B[i];
+    if (i < A.Len) Carry += A[i];
+    if (i < B.Len) Carry += B[i];
     R[i] = Carry % Base;
     Carry /= Base;
   }
@@ -51,8 +48,7 @@ ostream &operator<<(ostream &Out, const BigInt &V) {
   int i;
   Out << (V.Len == 0 ? 0 : V[V.Len - 1]);
   for (i = V.Len - 2; i >= 0; i--)
-    for (int j = Base / 10; j > 0; j /= 10)
-      Out << V[i] / j % 10;
+    for (int j = Base / 10; j > 0; j /= 10) Out << V[i] / j % 10;
   return Out;
 }
 
@@ -66,7 +62,6 @@ int main() {
     ans[i] = ans[i - 2] + ans[i - 1] + ans[i - 2];
   }
   int n;
-  while (cin >> n)
-    cout << ans[n] << endl;
+  while (cin >> n) cout << ans[n] << endl;
   return 0;
 }
