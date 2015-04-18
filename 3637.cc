@@ -18,8 +18,7 @@ int main(int argc, char const *argv[]) {
     sort(money, money + nitems);
     reverse(money, money + nitems);
     int sum = 0;
-    for (int i = 2; i < nitems; i += 3)
-      sum += money[i];
+    for (int i = 2; i < nitems; i += 3) sum += money[i];
     printf("%d\n", sum);
   }
   return 0;
