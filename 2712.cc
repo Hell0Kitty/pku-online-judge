@@ -2,32 +2,27 @@
 using namespace std;
 
 int isdigit(char c) {
-  if (c >= '0' && c <= '9')
-    return 1;
+  if (c >= '0' && c <= '9') return 1;
   return 0;
 }
 
 int isletter(char c) {
-  if (c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z')
-    return 1;
+  if (c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z') return 1;
   return 0;
 }
 
 int isupper(char c) {
-  if (c >= 'A' && c <= 'Z')
-    return 1;
+  if (c >= 'A' && c <= 'Z') return 1;
   return 0;
 }
 
 int ismark(char c) {
-  if (!isletter(c) && !isdigit(c) && c != ' ')
-    return 1;
+  if (!isletter(c) && !isdigit(c) && c != ' ') return 1;
   return 0;
 }
 
 int un(char c) {
-  if (c != 'A' && c != 'a' && c != 'I')
-    return 1;
+  if (c != 'A' && c != 'a' && c != 'I') return 1;
   return 0;
 }
 
@@ -36,14 +31,12 @@ int main() {
   int i, l, flag;
   while (1) {
     gets(s);
-    if (s[0] == '#')
-      break;
+    if (s[0] == '#') break;
     for (l = 0; s[l] != '\0'; l++)
       ;
     flag = 1;
 
-    if (l == 1 && un(s[0]))
-      flag = 0;
+    if (l == 1 && un(s[0])) flag = 0;
 
     for (i = 0; i < l - 1 && flag == 1; i++) {
       if (isupper(s[i]) && isupper(s[i + 1]))
