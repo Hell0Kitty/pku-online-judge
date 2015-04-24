@@ -29,8 +29,7 @@ int dp(int t, int from) {
   son[t] = maxson[t] = 0;
   for (int k = head[t]; k != -1; k = e[k].next) {
     int u = e[k].to;
-    if (use[u] || u == from)
-      continue;
+    if (use[u] || u == from) continue;
     now = dp(u, t);
     if (maxson[now] < tmp) {
       tmp = maxson[now];
@@ -41,8 +40,7 @@ int dp(int t, int from) {
   }
   son[t]++;
   maxson[t] = max(maxson[t], mm - son[t]);
-  if (maxson[t] < tmp)
-    ans = t;
+  if (maxson[t] < tmp) ans = t;
   return ans;
 }
 
@@ -51,8 +49,7 @@ void dfs(int t, int from) {
   son[t] = 0;
   for (int k = head[t], u; k != -1; k = e[k].next) {
     u = e[k].to;
-    if (use[u] || u == from)
-      continue;
+    if (use[u] || u == from) continue;
     d[u] = d[t] + e[k].w;
     dfs(u, t);
     son[t] += son[u];
@@ -63,8 +60,7 @@ void dfs(int t, int from) {
 int cal(int l, int r) {
   int ret = 0, now = r;
   for (int i = l; i <= now; i++) {
-    while (now > i && a[i] + a[now] > m)
-      now--;
+    while (now > i && a[i] + a[now] > m) now--;
     ret += now - i;
   }
   return ret;
@@ -78,8 +74,7 @@ void solve(int t) {
   int ret = 0, tmp = 2;
   for (int k = head[now]; k != -1; k = e[k].next) {
     int u = e[k].to;
-    if (use[u])
-      continue;
+    if (use[u]) continue;
     sort(a + tmp, a + tmp + son[u]);
     ret += cal(tmp, tmp + son[u] - 1);
     tmp += son[u];
@@ -89,8 +84,7 @@ void solve(int t) {
   //    printf("%d %d\n",now,ans);
   for (int k = head[now]; k != -1; k = e[k].next) {
     int u = e[k].to;
-    if (use[u] || son[u] == 1)
-      continue;
+    if (use[u] || son[u] == 1) continue;
     mm = son[u];
     solve(u);
   }
