@@ -14,7 +14,7 @@ struct TreeNode {
 };
 
 class Solution {
-private:
+ private:
   TreeNode *build(string &preorder, string &inorder, int pl, int pr, int il,
                   int ir) {
     TreeNode *root;
@@ -31,10 +31,9 @@ private:
     return root;
   }
 
-public:
+ public:
   void postorder_traversal(TreeNode *root) {
-    if (root == NULL)
-      return;
+    if (root == NULL) return;
     postorder_traversal(root->left);
     postorder_traversal(root->right);
     putchar(root->val);
