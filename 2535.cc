@@ -20,21 +20,17 @@ int main() {
     for (j = 0; j < P; j++) {
       scanf("%d", &nowProblemScore[j]);
 
-      if (nowProblemScore[j] < minNum)
-        minNum = nowProblemScore[j];
+      if (nowProblemScore[j] < minNum) minNum = nowProblemScore[j];
 
-      if (nowProblemScore[j] > maxNum)
-        maxNum = nowProblemScore[j];
+      if (nowProblemScore[j] > maxNum) maxNum = nowProblemScore[j];
     }
 
     // printf("minNum == %d\n",minNum);  //ok
 
     for (j = 0; j < P; j++) {
-      if (minNum == nowProblemScore[j])
-        problemRank[j]++;
+      if (minNum == nowProblemScore[j]) problemRank[j]++;
 
-      if (maxNum == nowProblemScore[j])
-        isHardest[j] = 1;
+      if (maxNum == nowProblemScore[j]) isHardest[j] = 1;
     }
   }
 
@@ -55,8 +51,7 @@ int main() {
 
   //最后的输出
   for (j = i + 1; j < P; j++)
-    if (isHardest[j] == 0 && problemRank[j] > N / 2)
-      printf(" %d", j + 1);
+    if (isHardest[j] == 0 && problemRank[j] > N / 2) printf(" %d", j + 1);
 
   printf("\n");
 
