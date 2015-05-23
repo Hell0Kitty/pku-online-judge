@@ -9,12 +9,9 @@ char map[N][N];
 int cnt;
 int h, w;
 bool ok(int x, int y) {
-  if (x < 0 || x >= h)
-    return false;
-  if (y < 0 || y >= w)
-    return false;
-  if (map[x][y] == '#')
-    return false;
+  if (x < 0 || x >= h) return false;
+  if (y < 0 || y >= w) return false;
+  if (map[x][y] == '#') return false;
   return true;
 }
 void dfs(int a, int b) {
@@ -31,7 +28,6 @@ void dfs(int a, int b) {
   }
 }
 int main() {
-
   int i, j;
   int s, t;
   while (scanf("%d %d", &w, &h), h || w) {
@@ -39,8 +35,7 @@ int main() {
     for (i = 0; i < h; getchar(), i++)
       for (j = 0; j < w; j++) {
         scanf("%c", &map[i][j]);
-        if (map[i][j] == '@')
-          s = i, t = j;
+        if (map[i][j] == '@') s = i, t = j;
       }
     cnt = 0;
     dfs(s, t);
