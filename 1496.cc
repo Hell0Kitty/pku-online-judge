@@ -47,7 +47,7 @@ int main(int i, int j) {
       }
 
       cout << ++sum << endl;
-        }
     }
-    return 0;
+  }
+  return 0;
 }
