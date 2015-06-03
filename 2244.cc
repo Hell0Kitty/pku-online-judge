@@ -30,8 +30,7 @@ int main() {
   int n;
   init();
   while (scanf("%d", &n)) {
-    if (!n)
-      break;
+    if (!n) break;
     printf("%d\n", ans[n]);
   }
   return 0;
