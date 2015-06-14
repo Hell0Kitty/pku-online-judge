@@ -29,8 +29,7 @@ int main() {
       }
       digit = (digit * j) % 10;
     }
-    for (i = 0; i < n2 - n5; i++)
-      digit = (digit * 2) % 10;
+    for (i = 0; i < n2 - n5; i++) digit = (digit * 2) % 10;
     printf("%5d -> %d\n", n, digit);
   }
   return 0;
