@@ -15,11 +15,10 @@ using namespace std;
 
 #define FASTER_IOS std::ios::sync_with_stdio(false);
 
-int main(int argc, char const *argv[])
-{
-	/* code */
-	FASTER_IOS
+int main(int argc, char const *argv[]) {
+  /* code */
+  FASTER_IOS
 
-	cout << -6 % 5 << endl;
-	return 0;
+  cout << -6 % 5 << endl;
+  return 0;
 }
