@@ -36,25 +36,23 @@ using namespace std;
 #define cpy(a, b) memcpy(a, b, sizeof a)
 #define rstn(a, v, n) memset(a, v, (n) * sizeof((a)[0]))
 #define cpyn(a, b, n) memcpy(a, b, (n) * sizeof((a)[0]))
-#define ast(b)                                                                 \
-  if (DBG && !(b)) {                                                           \
-    printf("%d!!|\n", __LINE__);                                               \
-    while (1)                                                                  \
-      getchar();                                                               \
+#define ast(b)                   \
+  if (DBG && !(b)) {             \
+    printf("%d!!|\n", __LINE__); \
+    while (1) getchar();         \
   }
 #define dout DBG &&cout << __LINE__ << ">>| "
 #define pr(x) #x "=" << (x) << " | "
 #define mk(x) DBG &&cout << __LINE__ << "**| " #x << endl
-#define pra(arr, a, b)                                                         \
-  if (DBG) {                                                                   \
-    dout << #arr "[] | ";                                                      \
-    forlec(i, a, b) cout << "[" << i << "]=" << arr[i] << " |"                 \
-                         << ((i - (a) + 1) % 13 ? " " : "\n");                 \
-    if (((b) - (a) + 1) % 13)                                                  \
-      puts("");                                                                \
+#define pra(arr, a, b)                                         \
+  if (DBG) {                                                   \
+    dout << #arr "[] | ";                                      \
+    forlec(i, a, b) cout << "[" << i << "]=" << arr[i] << " |" \
+                         << ((i - (a) + 1) % 13 ? " " : "\n"); \
+    if (((b) - (a) + 1) % 13) puts("");                        \
   }
-#define rd(type, x)                                                            \
-  type x;                                                                      \
+#define rd(type, x) \
+  type x;           \
   cin >> x
 inline int rdi() {
   int d;
@@ -74,10 +72,12 @@ inline double rddb() {
   scanf("%lf", &d);
   return d;
 }
-template <class T> inline bool updateMin(T &a, T b) {
+template <class T>
+inline bool updateMin(T &a, T b) {
   return a > b ? a = b, true : false;
 }
-template <class T> inline bool updateMax(T &a, T b) {
+template <class T>
+inline bool updateMax(T &a, T b) {
   return a < b ? a = b, true : false;
 }
 
@@ -111,8 +111,7 @@ bool possible() {
 }
 
 bool valid(int r) {
-  if (cnt[r])
-    return true;
+  if (cnt[r]) return true;
   forls(i, nxt, head[r], 0) if (!has[vex[i]][r]) return false;
   return true;
 }
@@ -120,16 +119,12 @@ bool valid(int r) {
 void add_has(int dep) { forl(i, 0, dep)++ has[ans[i]][ans[dep]]; }
 void del_has(int dep) { forl(i, 0, dep)-- has[ans[i]][ans[dep]]; }
 bool dfs(int dep) {
-  if (dep == len)
-    return true;
+  if (dep == len) return true;
   forls(i, R, R[h], t) {
     ans[dep] = i;
-    if (add_has(dep), --cnt[i] == 0)
-      del(i);
-    if (valid(i) && dfs(dep + 1))
-      return true;
-    if (del_has(dep), ++cnt[i] == 1)
-      ins(i);
+    if (add_has(dep), --cnt[i] == 0) del(i);
+    if (valid(i) && dfs(dep + 1)) return true;
+    if (del_has(dep), ++cnt[i] == 1) ins(i);
   }
   return false;
 }
