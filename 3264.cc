@@ -14,8 +14,7 @@ int n, q;
 
 void rmq_init() {
   int i, j;
-  for (j = 1; j <= n; j++)
-    mx[j][0] = mn[j][0] = h[j];
+  for (j = 1; j <= n; j++) mx[j][0] = mn[j][0] = h[j];
   int m = floor(log((double)n) / log(2.0));
 
   for (i = 1; i <= m; i++) {
@@ -45,8 +44,7 @@ int rmq(int l, int r) {
 int main() {
   int i, l, r;
   scanf("%d%d", &n, &q);
-  for (i = 1; i <= n; i++)
-    scanf("%d", &h[i]);
+  for (i = 1; i <= n; i++) scanf("%d", &h[i]);
   rmq_init();
   for (i = 0; i < q; i++) {
     scanf("%d%d", &l, &r);
