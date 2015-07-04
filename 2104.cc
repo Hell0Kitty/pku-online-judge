@@ -26,16 +26,13 @@ struct node {
   }
   void update() {
     siz = a;
-    if (ch[0])
-      siz += ch[0]->siz;
-    if (ch[1])
-      siz += ch[1]->siz;
+    if (ch[0]) siz += ch[0]->siz;
+    if (ch[1]) siz += ch[1]->siz;
   }
 } *null = new node(), *root[MAXN] = {NULL}, q[MAXN * 9];
 int q_s;
 void make_node(node *&y, node *&x, int l, int r, int t) {
-  if (x == NULL)
-    x = null;
+  if (x == NULL) x = null;
   y = &q[++q_s];
   *y = node();
   int m = (l + r) >> 1;
@@ -56,20 +53,16 @@ void make_node(node *&y, node *&x, int l, int r, int t) {
   }
 }
 void find(node *&x1, node *&x2, int l, int r, int k) {
-  if (x1 == NULL)
-    x1 = null;
-  if (x2 == NULL)
-    x2 = null;
+  if (x1 == NULL) x1 = null;
+  if (x2 == NULL) x2 = null;
   if (l == r) {
     printf("%d\n", a2[l]);
     return;
   }
   int m = (l + r) >> 1;
   int ls = 0;
-  if (x2->ch[0])
-    ls += x2->ch[0]->siz;
-  if (x1->ch[0])
-    ls -= x1->ch[0]->siz;
+  if (x2->ch[0]) ls += x2->ch[0]->siz;
+  if (x1->ch[0]) ls -= x1->ch[0]->siz;
   if (ls >= k)
     find(x1->ch[0], x2->ch[0], l, m, k);
   else
