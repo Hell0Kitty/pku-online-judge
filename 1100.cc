@@ -183,7 +183,8 @@ int main() {
       }
     } else
       cout << "Impossible";
-    cout << endl << endl;
+    cout << endl
+         << endl;
   }
   return 0;
 }
