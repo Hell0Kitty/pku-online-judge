@@ -14,22 +14,19 @@ using namespace std;
 int num[10005], n, t, a, b;
 int dp[10005];
 int DP(int m) {
-  if (dp[m] != -inf)
-    return dp[m];
+  if (dp[m] != -inf) return dp[m];
   int ans = inf;
   for (int i = m + 1; i < n; i++) {
     if (num[i] - num[m] >= a && num[i] - num[m] <= b)
       ans = min(ans, num[m] - DP(i));
   }
-  if (ans == inf)
-    return dp[m] = num[m];
+  if (ans == inf) return dp[m] = num[m];
   return dp[m] = ans;
 }
 int slove() {
   int ans = -inf;
   for (int i = 0; i < n; i++)
-    if (num[i] >= a && num[i] <= b)
-      ans = max(ans, DP(i));
+    if (num[i] >= a && num[i] <= b) ans = max(ans, DP(i));
   return ans == -inf ? 0 : ans;
 }
 int main() {
