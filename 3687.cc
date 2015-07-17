@@ -43,7 +43,7 @@ int main() {
     }
     i = topo();
     if (i) {
-      for (i = 0; i < n; i++) //最后的数据处理
+      for (i = 0; i < n; i++)  //最后的数据处理
       {
         ans[ji[i] + 1] = n - i;
       }
