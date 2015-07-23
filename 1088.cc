@@ -48,7 +48,7 @@ int main(void) {
   for (i = 1; i <= r; i++)
     for (j = 1; j <= c; j++)
       if (opt[i][j] > max) max = opt[i][j];
-    printf("%d\n",max+1);
+  printf("%d\n", max + 1);
 
-    return 1;
+  return 1;
 }
