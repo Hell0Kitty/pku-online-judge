@@ -68,9 +68,9 @@ int main() {
     } else {
       words[k] = str;
       insert(root, words[k]);
-            k++;  
-        }  
-    }  
-  
-    return 0;  
-}  
+      k++;
+    }
+  }
+
+  return 0;
+}
