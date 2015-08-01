@@ -3,15 +3,14 @@ struct node {
   int l, r;
   int st, mi, en;
   int id;
-}; // 线段树简单一维
+};  // 线段树简单一维
 const int maxN = 50000002;
 const int maxL = 10000020;
 node segment_tree[maxN];
 #define tree segment_tree
 int root, ptr;
 void insert(int cr, int start, int end, int color) {
-  if (start >= end)
-    return;
+  if (start >= end) return;
   if (tree[cr].st == start && tree[cr].en == end) {
     tree[cr].id = color;
     return;
@@ -47,11 +46,9 @@ void insert(int cr, int start, int end, int color) {
 
 char exist[10001];
 void trail(int cr) {
-  if (cr == 0 || tree[cr].id == -1)
-    return;
+  if (cr == 0 || tree[cr].id == -1) return;
   exist[tree[cr].id] = 1;
-  if (tree[cr].id != 0)
-    return;
+  if (tree[cr].id != 0) return;
   trail(tree[cr].l);
   trail(tree[cr].r);
 }
@@ -73,16 +70,13 @@ int main() {
       scanf("%d%d", &l, &r);
       insert(1, l, r + 1, i);
     }
-    for (i = 1; i <= n; i++)
-      exist[i] = 0;
+    for (i = 1; i <= n; i++) exist[i] = 0;
     trail(1);
     int ans = 0;
     for (i = 1; i <= n; i++)
-      if (exist[i])
-        ans++;
+      if (exist[i]) ans++;
     printf("%d\n", ans);
   }
   scanf("\n");
   return 0;
 }
-
