@@ -88,19 +88,16 @@ bool read_graph() {
   }
   for (i = 0; i < np; i++) {
     scanf(" (%d)%d ", &u, &z);
-    C[s][u+2] = z;
+    C[s][u + 2] = z;
   }
-  for(i=0; i<nc; i++)
-  {
-    scanf(" (%d)%d",&u,&z);
-    C[u+2][t] = z;
+  for (i = 0; i < nc; i++) {
+    scanf(" (%d)%d", &u, &z);
+    C[u + 2][t] = z;
   }
   return true;
 }
 
-int main()
-{
-  while(read_graph())
-    EdmondsKarp(C,n+1,s,t,F);
+int main() {
+  while (read_graph()) EdmondsKarp(C, n + 1, s, t, F);
   return 0;
 }
