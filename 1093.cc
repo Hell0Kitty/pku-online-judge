@@ -109,17 +109,17 @@ int main() {
                            &t))  // 格式符\n表示本次读过的字节数
       {
         length[n] = strlen(words[n]);  // 记录各单词的长度
-                ++n;
+        ++n;
 
-                pos += t; // 当前处理都得字符位置
-                t = 0;
-            }
-        }
-
-        format_text(); // 格式化文本，并输出
-
-        printf("\n"); // 打印空行
+        pos += t;  // 当前处理都得字符位置
+        t = 0;
+      }
     }
 
-    return 0;
+    format_text();  // 格式化文本，并输出
+
+    printf("\n");  // 打印空行
+  }
+
+  return 0;
 }
