@@ -61,10 +61,9 @@ int main(void) {  //读图并压缩成相应的状态图
 
   //搜索最优解
   connons = 0;
-  for ( int j = 0; j < sNum; j++ )
-    for ( int k = 0; k < sNum; k++ )
-      if ( connons < f[roll][j][k] )
-        connons = f[roll][j][k];
-  printf( "%d\n", connons );
+  for (int j = 0; j < sNum; j++)
+    for (int k = 0; k < sNum; k++)
+      if (connons < f[roll][j][k]) connons = f[roll][j][k];
+  printf("%d\n", connons);
   return 0;
 }
