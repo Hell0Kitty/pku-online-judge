@@ -48,8 +48,7 @@ int cmp(const void *a, const void *b) {
 }
 int solve() {
   int i, j;
-  for (i = 1; i <= sptr; i++)
-    qsort(a[i] + 1, ptr[i], sizeof(com1), cmp);
+  for (i = 1; i <= sptr; i++) qsort(a[i] + 1, ptr[i], sizeof(com1), cmp);
   int min, mid, max;
   min = 0;
   max = 1000000000;
@@ -67,17 +66,14 @@ int solve() {
           break;
         }
       }
-      if (judge == 0)
-        judge2 = 0;
+      if (judge == 0) judge2 = 0;
     }
     if (judge2 == 0) {
       max = mid;
       continue;
     }
-    if (money > b)
-      max = mid;
-    if (money <= b)
-      min = mid;
+    if (money > b) max = mid;
+    if (money <= b) min = mid;
   }
   mid = min + 1;
   money = 0;
@@ -91,13 +87,10 @@ int solve() {
         break;
       }
     }
-    if (judge == 0)
-      judge2 = 0;
+    if (judge == 0) judge2 = 0;
   }
-  if (money > b)
-    judge2 = 0;
-  if (judge2 == 1)
-    min++;
+  if (money > b) judge2 = 0;
+  if (judge2 == 1) min++;
   printf("%d\n", min);
   return 0;
 }
