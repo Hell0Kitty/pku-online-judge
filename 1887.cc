@@ -7,19 +7,18 @@ using namespace std;
 
 int number[1000000];
 class Solution {
-public:
+ public:
   int lengthOfLIS(int *nums, int num_size) {
-    if (num_size == 0)
-      return 0;
+    if (num_size == 0) return 0;
     int *d = new int[num_size];
     for (int i = 0; i < num_size; ++i) {
       d[i] = nums[i];
     }
-    int len = LISSEx(d, num_size); //, int result[])
+    int len = LISSEx(d, num_size);  //, int result[])
     delete d;
     return len;
   }
-  unsigned int LISSEx(const int array[], size_t length) //, int result[])
+  unsigned int LISSEx(const int array[], size_t length)  //, int result[])
   {
     unsigned int i, j, k, l, max;
     unsigned int liss[length];
@@ -79,13 +78,11 @@ int main(int argc, char const *argv[]) {
     while (true) {
       int tmp;
       cin >> tmp;
-      if (tmp < 0)
-        break;
+      if (tmp < 0) break;
       number[arraylen++] = tmp;
     }
 
-    if (arraylen == 0)
-      break;
+    if (arraylen == 0) break;
     // cout <<"[dbg] the array length is: " << arraylen << endl;
     // for (int i = 0; i < arraylen; ++i)
     //  {
@@ -94,7 +91,8 @@ int main(int argc, char const *argv[]) {
     reverse(number, number + arraylen);
     int answer = s.lengthOfLIS(number, arraylen);
     cout << "Test #" << cur_case++ << ":" << endl;
-    cout << "  maximum possible interceptions: " << answer << endl << endl;
+    cout << "  maximum possible interceptions: " << answer << endl
+         << endl;
   }
   return 0;
 }
