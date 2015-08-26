@@ -4,7 +4,7 @@ trie  poj 2503 tengshengbo
 #include <iostream>
 #include <string>
 using namespace std;
-int trie[200000][28]; // 27是字符串号
+int trie[200000][28];  // 27是字符串号
 char str[100005][12];
 int all;
 int insert(char *s, int t) {
@@ -30,8 +30,7 @@ int find(char *s) {
   j = strlen(s);
   for (i = 0; i < j; i++) {
     int t = s[i] - 'a';
-    if (trie[now][t] < 0)
-      return -1;
+    if (trie[now][t] < 0) return -1;
     now = trie[now][t];
   }
   return trie[now][27];
@@ -41,8 +40,7 @@ int main() {
   all = 0;
   int i, j;
   for (i = 0; i < 200000; i++)
-    for (j = 0; j < 28; j++)
-      trie[i][j] = -1;
+    for (j = 0; j < 28; j++) trie[i][j] = -1;
   int total = 0;
   while ((gets(s)) && (s[0] != 0)) {
     char b[12];
