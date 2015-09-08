@@ -72,13 +72,11 @@ int main() {
       char c;
       for (int pos = l - 1; pos >= 0; --pos) {
         cin >> c;
-        if (c == '1')
-          init |= 1 << pos;
+        if (c == '1') init |= 1 << pos;
       }
       for (int pos = l - 1; pos >= 0; --pos) {
         cin >> c;
-        if (c == '1')
-          dest |= 1 << pos;
+        if (c == '1') dest |= 1 << pos;
       }
       if (dijkstra())
         printf("%d ", d[dest]);
