@@ -15,8 +15,7 @@ int times;
 int mapp[6][6];
 int step[4][2] = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
 void dfs(int par) {
-  if (par)
-    dfs(po[par].fa);
+  if (par) dfs(po[par].fa);
   if (par > 0) {
     printf("(%d, %d)\n", po[par].row, po[par].col);
   }
