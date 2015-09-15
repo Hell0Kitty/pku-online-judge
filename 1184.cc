@@ -94,7 +94,7 @@ int main() {
       }
       if (j == 6 && st < ans) ans = st;
     }
-        printf("%d\n",ans);
-    }
-    return 0;
+    printf("%d\n", ans);
+  }
+  return 0;
 }
