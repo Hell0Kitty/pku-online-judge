@@ -2,8 +2,8 @@
 #include <string>
 using namespace std;
 
-const int size = 1000000; //大数位数上限
-int n;                    //大数位数
+const int size = 1000000;  //大数位数上限
+int n;                     //大数位数
 
 int a[size + 1];
 int b[size + 1];
@@ -18,15 +18,13 @@ void add(char *A, char *B, char *ans) {
 
   /*倒序*/
 
-  for (int i = lena - 1; i >= 0; i--)
-    a[pa++] = A[i] - '0';
-  for (int j = lenb - 1; j >= 0; j--)
-    b[pb++] = B[j] - '0';
+  for (int i = lena - 1; i >= 0; i--) a[pa++] = A[i] - '0';
+  for (int j = lenb - 1; j >= 0; j--) b[pb++] = B[j] - '0';
 
   int len = lena > lenb ? lena : lenb;
-  char *c = new char[len + 1]; //倒序的ans
+  char *c = new char[len + 1];  //倒序的ans
 
-  int w = 0; //低位到高位的进位
+  int w = 0;  //低位到高位的进位
   for (int k = 0; k < len; k++) {
     int temp = a[k] + b[k] + w;
     c[k] = temp % 10 + '0';
@@ -34,7 +32,7 @@ void add(char *A, char *B, char *ans) {
   }
   len--;
 
-  for (w = 0; len >= 0; len--) // w和len均作指针使用，已无意义
+  for (w = 0; len >= 0; len--)  // w和len均作指针使用，已无意义
     ans[w++] = c[len];
   ans[w] = '\0';
 
@@ -51,14 +49,14 @@ int main(int i) {
     getchar();
     for (i = 0; i < n; i++) {
       A[i] = getchar();
-      getchar(); //空格
+      getchar();  //空格
       B[i] = getchar();
-      getchar(); //回车
+      getchar();  //回车
     }
     A[i] = B[i] = '\0';
 
-        add(A,B,ans);
-        cout<<ans<<endl;
-    }
-    return 0;
+    add(A, B, ans);
+    cout << ans << endl;
+  }
+  return 0;
 }
