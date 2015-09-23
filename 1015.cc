@@ -9,7 +9,7 @@ int prosecution[POOL_MAX], defense[POOL_MAX];
 int m, n;
 int caseno = 1;
 
-int last [JURY_MAX][2 * VALUE_MAX * JURY_MAX + 1];
+int last[JURY_MAX][2 * VALUE_MAX * JURY_MAX + 1];
 int sum[JURY_MAX][2 * VALUE_MAX * JURY_MAX + 1];
 
 int compare(const void *a, const void *b) {
@@ -86,13 +86,12 @@ int read_case() {
   skip_line();
   for (i = 0; i < n; i++) {
     scanf("%d %d", prosecution + i, defense + i);
-                  skip_line();
-                }
-      return 1;
-    }
+    skip_line();
+  }
+  return 1;
+}
 
-int main()
-{
- while(read_case()) solve_case();
+int main() {
+  while (read_case()) solve_case();
   return 0;
 }
