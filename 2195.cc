@@ -106,7 +106,6 @@ void add(int x, int y, int cap, int cost) {
 int ABS(int num) { return num > 0 ? num : (-num); }
 
 int main() {
-
   int N, M, m, h, i, j;
   while (scanf("%d%d", &N, &M) && (N || M)) {
     m = 0, h = 0;
@@ -128,8 +127,7 @@ int main() {
       }
     }
     IntialEdge(m + h + 2);
-    for (i = 0; i < m; i++)
-      add(0, i + 1, 1, 0);
+    for (i = 0; i < m; i++) add(0, i + 1, 1, 0);
     for (i = 0; i < m; i++) {
       for (j = 0; j < h; j++) {
         int weight =
@@ -137,8 +135,7 @@ int main() {
         add(i + 1, m + j + 1, 1, weight);
       }
     }
-    for (j = 0; j < h; j++)
-      add(m + j + 1, m + h + 1, 1, 0);
+    for (j = 0; j < h; j++) add(m + j + 1, m + h + 1, 1, 0);
     MaxFlowMincostAlgorithm(m + h + 2, 0, m + h + 1);
   }
   return 0;
