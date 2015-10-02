@@ -13,8 +13,7 @@ int main() {
       xx = sqrt(x * x - mid * mid);
       yy = sqrt(y * y - mid * mid);
       tt = xx * yy / (xx + yy);
-      if (fabs(tt - c) < EPS)
-        break;
+      if (fabs(tt - c) < EPS) break;
       if (tt < c)
         r = mid;
       else
