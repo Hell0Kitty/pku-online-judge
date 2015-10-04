@@ -72,13 +72,11 @@ int make_graph() {
   int i, j, tmp;
   for (i = 1; i <= n; ++i)
     for (j = n; j >= 1; --j)
-      if (g[i][j])
-        add_edge(i, j, g[i][j]);
+      if (g[i][j]) add_edge(i, j, g[i][j]);
   return 0;
 }
 void dfs(const int &u, const int &dist) {
-  if (dist > limit)
-    return;
+  if (dist > limit) return;
   route[deep] = u;
   ++deep;
   if (u == end) {
@@ -106,8 +104,7 @@ int output() {
   }
   for (i = 0; i < ans; ++i) {
     printf(" %d:", node[i].len);
-    for (j = 0; j < node[i].num; ++j)
-      printf(" %d", node[i].city[j]);
+    for (j = 0; j < node[i].num; ++j) printf(" %d", node[i].city[j]);
     printf("\n");
   }
   printf("\n");
@@ -123,8 +120,7 @@ int work() {
 int main() {
   case_id = 1;
   while (scanf("%d", &n) != EOF) {
-    if (n == -1)
-      break;
+    if (n == -1) break;
     init();
     input();
     work();
