@@ -27,7 +27,7 @@ point barycenter(int n, point* p) {
 }
 
 int main() {
-  point *p, ret;
+  point* p, ret;
   int ncases, n;  // ncases 个测试用例, n 个点
   scanf("%d", &ncases);
   while (ncases--) {
