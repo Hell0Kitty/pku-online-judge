@@ -8,19 +8,16 @@ int pow[7] = {0, 26, 702, 18278, 475254, 12356630, 321272406};
 
 int main() {
   while (~scanf("%s", s)) {
-    if (strcmp(s, "R0C0") == 0)
-      break;
+    if (strcmp(s, "R0C0") == 0) break;
     int cnt = 0, i, j;
     for (i = 1; s[i]; i++) {
-      if (s[i] == 'C')
-        break;
+      if (s[i] == 'C') break;
       s1[cnt++] = s[i];
     }
     s1[cnt] = '\0';
 
     int ans = 0;
-    for (j = i + 1; s[j]; j++)
-      ans = ans * 10 + s[j] - '0';
+    for (j = i + 1; s[j]; j++) ans = ans * 10 + s[j] - '0';
 
     char tmp[10];
 
@@ -39,8 +36,7 @@ int main() {
         }
         ans = ans / 26;
       }
-      for (j = cnt - 1; j >= 0; j--)
-        printf("%c", tmp[j]);
+      for (j = cnt - 1; j >= 0; j--) printf("%c", tmp[j]);
     } else if (ans <= 18278) {
       for (cnt = 0; cnt < 3; cnt++) {
         int t = ans % 26;
@@ -53,8 +49,7 @@ int main() {
         }
         ans = ans / 26;
       }
-      for (j = cnt - 1; j >= 0; j--)
-        printf("%c", tmp[j]);
+      for (j = cnt - 1; j >= 0; j--) printf("%c", tmp[j]);
     } else if (ans <= 475254) {
       for (cnt = 0; cnt < 4; cnt++) {
         int t = ans % 26;
@@ -67,8 +62,7 @@ int main() {
         }
         ans = ans / 26;
       }
-      for (j = cnt - 1; j >= 0; j--)
-        printf("%c", tmp[j]);
+      for (j = cnt - 1; j >= 0; j--) printf("%c", tmp[j]);
     } else if (ans <= 12356630) {
       for (cnt = 0; cnt < 5; cnt++) {
         int t = ans % 26;
@@ -81,8 +75,7 @@ int main() {
         }
         ans = ans / 26;
       }
-      for (j = cnt - 1; j >= 0; j--)
-        printf("%c", tmp[j]);
+      for (j = cnt - 1; j >= 0; j--) printf("%c", tmp[j]);
     } else if (ans <= 321272406) {
       for (cnt = 0; cnt < 6; cnt++) {
         int t = ans % 26;
@@ -95,8 +88,7 @@ int main() {
         }
         ans = ans / 26;
       }
-      for (j = cnt - 1; j >= 0; j--)
-        printf("%c", tmp[j]);
+      for (j = cnt - 1; j >= 0; j--) printf("%c", tmp[j]);
     }
     printf("%s\n", s1);
   }
