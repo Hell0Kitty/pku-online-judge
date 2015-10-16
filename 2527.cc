@@ -34,7 +34,7 @@ int main() {
       printf("%d ", val[i]);
     }
     printf("%d\n", val[t]);
-    }
+  }
 
-    return 0;
+  return 0;
 }
