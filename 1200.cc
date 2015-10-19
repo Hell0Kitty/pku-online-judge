@@ -27,7 +27,7 @@ int main() {
       ans++;
       hash[key] = true;
     }
-    }
-    printf("%d\n",ans);
-    return 0;
+  }
+  printf("%d\n", ans);
+  return 0;
 }
