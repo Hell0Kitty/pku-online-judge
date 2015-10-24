@@ -20,8 +20,7 @@ int main(int argc, char const *argv[]) {
   for (i = 0; i < 4; i++)
     for (j = 0; j < 4; j++) {
       cin >> ch;
-      if (ch == '+')
-        status ^= change[i][j];
+      if (ch == '+') status ^= change[i][j];
     }
   k = 0;
   status *= 2;
@@ -39,8 +38,7 @@ int main(int argc, char const *argv[]) {
       j--;
   }
   cout << k << endl;
-  for (i = k - 1; i >= 0; i--)
-    cout << step[i][0] << " " << step[i][1] << endl;
+  for (i = k - 1; i >= 0; i--) cout << step[i][0] << " " << step[i][1] << endl;
   // system("pause");
   return 0;
 }
