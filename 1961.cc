@@ -7,8 +7,7 @@ int main() {
   int i, j, k, length, count, num = 0;
   while (1) {
     scanf("%d", &length);
-    if (length == 0)
-      break;
+    if (length == 0) break;
     // length++;
     scanf("%s", s + 1);
 
@@ -25,14 +24,11 @@ int main() {
         j = next[j];
     }
 
-
-
     printf("Test case #%d\n", ++num);
     for (k = 2; k <= length; k++) {
       if (k % ((k + 1) - next[k + 1]) == 0) {
         count = k / ((k + 1) - next[k + 1]);
-        if (count != 1)
-          printf("%d %d\n", k, count);
+        if (count != 1) printf("%d %d\n", k, count);
       }
     }
     printf("\n");
