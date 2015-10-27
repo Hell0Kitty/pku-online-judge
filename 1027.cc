@@ -22,7 +22,8 @@ int main(void) {
   cin >> Game;
   for (int g = 1; g <= Game; g++) {
     for (int k = 9; k >= 0; k--) cin >> map[k];
-    cout << "Game " << g << ':' << endl << endl;
+    cout << "Game " << g << ':' << endl
+         << endl;
 
     int step = 0;
     int RemainBalls = 150;
@@ -204,17 +205,14 @@ void RefreshMap(void) {
           map[x][j] = 0;
         }
         empty[j] = true;
-                j=k;
-                k=-1;
-            }
-        }
-        else
-        {
-            k=j;
-            while(j+1<15 && empty[j+1])
-                j++;
-        }
+        j = k;
+        k = -1;
+      }
+    } else {
+      k = j;
+      while (j + 1 < 15 && empty[j + 1]) j++;
     }
+  }
 
-    return;
+  return;
 }
