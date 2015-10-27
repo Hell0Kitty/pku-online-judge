@@ -31,18 +31,15 @@ int main() {
   int ok;
   int from, to;
   scanf("%d%d", &num, &d);
-  for (int i = 1; i <= num; ++i)
-    p[i].pre = i;
+  for (int i = 1; i <= num; ++i) p[i].pre = i;
   memset(use, false, sizeof(use));
-  for (int i = 1; i <= num; ++i)
-    scanf("%d%d", &p[i].x, &p[i].y);
+  for (int i = 1; i <= num; ++i) scanf("%d%d", &p[i].x, &p[i].y);
   while (scanf("\n%c", &ope) != EOF) {
     if (ope == 'O') {
       scanf("%d", &ok);
       use[ok] = true;
       for (int i = 1; i <= num; ++i)
-        if (use[i] && i != ok)
-          join(p[i], p[ok]);
+        if (use[i] && i != ok) join(p[i], p[ok]);
     } else {
       scanf("%d%d", &from, &to);
       if (find(from) == find(to))
