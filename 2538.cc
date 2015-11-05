@@ -10,11 +10,9 @@ int main(void) {
   int len = strlen(str);
   while (gets(text)) {
     for (int k = 0; k < strlen(text); k++) {
-      if (text[k] == ' ')
-        cout << text[k];
+      if (text[k] == ' ') cout << text[k];
       for (int i = 0; i < len; i++) {
-        if (text[k] == str[i])
-          cout << str[i - 1];
+        if (text[k] == str[i]) cout << str[i - 1];
       }
     }
     cout << endl;
