@@ -12,11 +12,9 @@ void excel() {
   for (i = 1; i <= 5842; i++) {
     int min = MAX;
     for (j = 0; j < 4; j++)
-      if (num[loc[j]] * prime[j] < min)
-        min = num[loc[j]] * prime[j];
+      if (num[loc[j]] * prime[j] < min) min = num[loc[j]] * prime[j];
     for (j = 0; j < 4; j++)
-      if (num[loc[j]] * prime[j] == min)
-        loc[j]++;
+      if (num[loc[j]] * prime[j] == min) loc[j]++;
     num[i] = min;
   }
 }
@@ -34,12 +32,9 @@ void make_ranked(int n) /*加数字后面的英语序数词，四级没过。。
   else
     strcpy(rank, "st");
 
-  if (last == 1 && seclast == 1)
-    strcpy(rank, "th");
-  if (last == 2 && seclast == 1)
-    strcpy(rank, "th");
-  if (last == 3 && seclast == 1)
-    strcpy(rank, "th");
+  if (last == 1 && seclast == 1) strcpy(rank, "th");
+  if (last == 2 && seclast == 1) strcpy(rank, "th");
+  if (last == 3 && seclast == 1) strcpy(rank, "th");
 }
 
 int main() {
