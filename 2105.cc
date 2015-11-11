@@ -15,12 +15,10 @@ int main() {
       if ((i + 1) % 8 == 0) {
         int j, sum = 0;
         for (j = i - 7; i - j >= 0; j++) {
-          if (a[j] != '0')
-            sum = sum + pow(2.0, (i - j));
+          if (a[j] != '0') sum = sum + pow(2.0, (i - j));
         }
         cout << sum;
-        if (i != 31)
-          cout << ".";
+        if (i != 31) cout << ".";
       }
     }
     cout << endl;
