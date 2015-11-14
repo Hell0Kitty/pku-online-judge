@@ -14,10 +14,9 @@ int main() {
       a[i] = a[i - 1] - i;
     else
       a[i] = a[i - 1] + i;
-    hash[a[i]] = true; // hash[a[i]] = true,标志为已经出现过
+    hash[a[i]] = true;  // hash[a[i]] = true,标志为已经出现过
   }
-  while (~scanf("%d", &i), i >= 0)
-    printf("%d\n", a[i]);
+  while (~scanf("%d", &i), i >= 0) printf("%d\n", a[i]);
 
   return 0;
 }
