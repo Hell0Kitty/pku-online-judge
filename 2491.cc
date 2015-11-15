@@ -38,7 +38,8 @@ int main() {
         head = head_tail[1 - j];
       }
     }
-    cout << "Scenario #" << i << ":" << endl << head << endl;
+    cout << "Scenario #" << i << ":" << endl
+         << head << endl;
     while (ssmap[head].size() != 0) {
       cout << ssmap[head] << endl;
       head = ssmap[head];
