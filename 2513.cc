@@ -56,8 +56,7 @@ int insert(char *s) {
 // union_find is used to judge whether the graph is connected.
 int uset[510001];
 int get_root(const int &v) {
-  if (uset[v] == v)
-    return v;
+  if (uset[v] == v) return v;
   return uset[v] = get_root(uset[v]);
 }
 inline void Unite(const int &a, const int &b) { uset[uset[b]] = uset[a]; }
@@ -65,12 +64,10 @@ inline void Unite(const int &a, const int &b) { uset[uset[b]] = uset[a]; }
 int main() {
   char s[80];
   int i, len, pos, a, b;
-  for (i = 0; i < 510000; i++)
-    uset[i] = i;
+  for (i = 0; i < 510000; i++) uset[i] = i;
   while (gets(s)) {
     i = 0;
-    while (s[i] != ' ')
-      i++;
+    while (s[i] != ' ') i++;
     s[i] = 0;
     a = insert(s);
     b = insert(s + i + 1);
