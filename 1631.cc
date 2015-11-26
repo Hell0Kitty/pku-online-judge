@@ -7,19 +7,18 @@
 using namespace std;
 
 class Solution {
-public:
+ public:
   int lengthOfLIS(int *nums, int size) {
-    if (size == 0)
-      return 0;
+    if (size == 0) return 0;
     int *d = new int[size];
     for (int i = 0; i < size; ++i) {
       d[i] = nums[i];
     }
-    int len = LISSEx(d, size); //, int result[])
+    int len = LISSEx(d, size);  //, int result[])
     delete d;
     return len;
   }
-  unsigned int LISSEx(const int array[], size_t length) //, int result[])
+  unsigned int LISSEx(const int array[], size_t length)  //, int result[])
   {
     unsigned int i, j, k, l, max;
     unsigned int liss[length];
