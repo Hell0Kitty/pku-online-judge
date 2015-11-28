@@ -12,8 +12,7 @@ using namespace std;
 int main(int argc, char *argv[]) {
   int n;
   while (scanf("%d", &n) != EOF) {
-    if (n == 0)
-      break;
+    if (n == 0) break;
 
     if (n < 3)
       printf("Alice\n");
