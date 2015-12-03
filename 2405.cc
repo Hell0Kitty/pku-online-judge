@@ -21,8 +21,7 @@ double bs(double V, double D) {
 
 int main() {
   double D, V;
-  while (cin >> D >> V && D + V)
-    printf("%.3lf\n", bs(V, D));
+  while (cin >> D >> V && D + V) printf("%.3lf\n", bs(V, D));
 
   return 0;
 }
