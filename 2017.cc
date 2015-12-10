@@ -9,8 +9,7 @@ int main(int argc, char const *argv[]) {
   while (true) {
     int nline;
     cin >> nline;
-    if (nline < 0)
-      break;
+    if (nline < 0) break;
     int speed, hour;
     int prehour = 0;
     long sum = 0;
