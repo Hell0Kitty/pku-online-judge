@@ -16,15 +16,12 @@ int main() {
     scanf("%d%d", &x, &y);
     big = x / CAPACITY;
     s = 0;
-    for (j = 0; j < big; j++)
-      s += bucket[j];
-    for (j = CAPACITY * big; j <= x; j++)
-      s += a[j];
+    for (j = 0; j < big; j++) s += bucket[j];
+    for (j = CAPACITY * big; j <= x; j++) s += a[j];
     level[s]++;
     a[x]++;
     bucket[big]++;
   }
-  for (i = 0; i < n; i++)
-    printf("%d\n", level[i]);
+  for (i = 0; i < n; i++) printf("%d\n", level[i]);
   scanf("\n");
 }
