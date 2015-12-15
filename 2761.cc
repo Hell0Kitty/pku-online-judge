@@ -9,12 +9,10 @@ int num[maxn], dat[20][maxn], cnt[20][maxn];
 int N, M, K;
 
 void build(int L, int R, int o) {
-  if (L == R)
-    return;
+  if (L == R) return;
   int M = (L + R) >> 1;
-  int lc = 0; /// num[M]有重复的话，可以进入左子数的num[M]的个数
-  for (int i = M; num[i] == num[M]; i--)
-    lc++;
+  int lc = 0;  /// num[M]有重复的话，可以进入左子数的num[M]的个数
+  for (int i = M; num[i] == num[M]; i--) lc++;
   int lp = L, rp = M + 1, p = 0;
   for (int i = L; i <= R; i++) {
     if (dat[o][i] < num[M] || (dat[o][i] == num[M] && (lc-- > 0))) {
@@ -31,8 +29,7 @@ void build(int L, int R, int o) {
 
 int _l, _r, _x;
 int query(int L, int R, int o) {
-  if (L == R)
-    return dat[o][L];
+  if (L == R) return dat[o][L];
   int M = (L + R) >> 1;
   int ls = _l - 1 < L ? 0 : cnt[o][_l - 1];
   if (cnt[o][_r] - ls >= _x) {
@@ -57,8 +54,8 @@ int main() {
   build(1, N, 1);
   while (M--) {
     scanf("%d%d%d", &_l, &_r, &_x);
-                printf("%d\n", query(1, N, 1));
-        }
+    printf("%d\n", query(1, N, 1));
+  }
 
-        return 0;
+  return 0;
 }
