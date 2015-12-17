@@ -32,7 +32,7 @@ void Union_Set(int x, int y) {
 }
 
 int main() {
-//  freopen("in.txt", "r", stdin);
+  //  freopen("in.txt", "r", stdin);
   int n, m;
   int i, x, y, c;
   int num = 1;
