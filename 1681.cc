@@ -11,11 +11,11 @@ const int MAXN = 300;
 
 //有equ个方程，var个变元。增广矩阵行数为equ,分别为0到equ-1,列数为var+1,分别为0到var.
 int equ, var;
-int a[MAXN][MAXN]; //增广矩阵
-int x[MAXN];       //解集
+int a[MAXN][MAXN];  //增广矩阵
+int x[MAXN];        //解集
 
-bool free_x[MAXN]; //标记是否是不确定的变元
-int free_num;      //不确定变元个数
+bool free_x[MAXN];  //标记是否是不确定的变元
+int free_num;       //不确定变元个数
 
 void Debug(void) {
   int i, j;
@@ -41,12 +41,10 @@ int Gauss() {
   for (k = 0; k < equ && col < var; k++, col++) {
     max_r = k;
     for (i = k + 1; i < equ; i++) {
-      if (abs(a[i][col]) > abs(a[max_r][col]))
-        max_r = i;
+      if (abs(a[i][col]) > abs(a[max_r][col])) max_r = i;
     }
     if (max_r != k) {
-      for (j = col; j < var + 1; j++)
-        swap(a[k][j], a[max_r][j]);
+      for (j = col; j < var + 1; j++) swap(a[k][j], a[max_r][j]);
     }
     if (a[k][col] == 0) {
       k--;
@@ -54,19 +52,16 @@ int Gauss() {
     }
     for (i = k + 1; i < equ; i++) {
       if (a[i][col] != 0) {
-        for (j = col; j < var + 1; j++)
-          a[i][j] ^= a[k][j];
+        for (j = col; j < var + 1; j++) a[i][j] ^= a[k][j];
       }
     }
   }
   for (i = k; i < equ; i++) {
-    if (a[i][col] != 0)
-      return -1; //无解
+    if (a[i][col] != 0) return -1;  //无解
   }
   for (i = var - 1; i >= 0; i--) {
     x[i] = a[i][var];
-    for (j = i + 1; j < var; j++)
-      x[i] ^= (a[i][j] && x[j]);
+    for (j = i + 1; j < var; j++) x[i] ^= (a[i][j] && x[j]);
   }
   return 0;
 }
@@ -76,21 +71,17 @@ int n;
 void init() {
   memset(a, 0, sizeof(a));
   memset(x, 0, sizeof(x));
-  memset(free_x, 1, sizeof(free_x)); // 一开始全是不确定的变元.
+  memset(free_x, 1, sizeof(free_x));  // 一开始全是不确定的变元.
   equ = n * n;
   var = n * n;
   for (int i = 0; i < n; i++)
     for (int j = 0; j < n; j++) {
       int t = i * n + j;
       a[t][t] = 1;
-      if (i > 0)
-        a[(i - 1) * n + j][t] = 1;
-      if (i < n - 1)
-        a[(i + 1) * n + j][t] = 1;
-      if (j > 0)
-        a[i * n + j - 1][t] = 1;
-      if (j < n - 1)
-        a[i * n + j + 1][t] = 1;
+      if (i > 0) a[(i - 1) * n + j][t] = 1;
+      if (i < n - 1) a[(i + 1) * n + j][t] = 1;
+      if (j > 0) a[i * n + j - 1][t] = 1;
+      if (j < n - 1) a[i * n + j + 1][t] = 1;
     }
 }
 char str[20];
@@ -119,10 +110,10 @@ int main() {
     }
 
     int ans = 0;
-        for(int i=0;i<n*n;i++)
-          if(x[i]==1)ans++;
+    for (int i = 0; i < n * n; i++)
+      if (x[i] == 1) ans++;
 
-        printf("%d\n",ans);
-    }
-    return 0;
+    printf("%d\n", ans);
+  }
+  return 0;
 }
