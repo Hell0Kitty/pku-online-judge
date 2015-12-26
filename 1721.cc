@@ -16,13 +16,10 @@ void solve() {
     _count++;
     int j;
     for (j = 1; j <= n; j++) {
-      if (b[j] != a[j])
-        break;
+      if (b[j] != a[j]) break;
     }
-    if (j > n)
-      break;
-    for (int i = 1; i <= n; i++)
-      c[i] = b[i];
+    if (j > n) break;
+    for (int i = 1; i <= n; i++) c[i] = b[i];
   }
 }
 int main() {
@@ -42,13 +39,10 @@ int main() {
     m = _count - m;
     int q = 0;
     while (q < m) {
-      for (int i = 1; i <= n; i++)
-        b[i] = a[a[i]];
-      for (int i = 1; i <= n; i++)
-        a[i] = b[i];
+      for (int i = 1; i <= n; i++) b[i] = a[a[i]];
+      for (int i = 1; i <= n; i++) a[i] = b[i];
       q++;
     }
-    for (int i = 1; i <= n; i++)
-      cout << b[i] << endl;
+    for (int i = 1; i <= n; i++) cout << b[i] << endl;
   }
 }
