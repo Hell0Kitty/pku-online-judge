@@ -6,10 +6,10 @@ using namespace std;
 
 const int kind = 26;
 struct node {
-  node *fail;  //失败指针
+  node *fail;        //失败指针
   node *next[kind];  // Tire每个节点的26个子节点（最多26个字母）
-  int id;   //是否为该单词的最后一个节点
-  node() {  //构造函数初始化
+  int id;            //是否为该单词的最后一个节点
+  node() {           //构造函数初始化
     fail = NULL;
     id = -1;
     memset(next, (int)NULL, sizeof(next));
