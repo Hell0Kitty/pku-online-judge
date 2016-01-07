@@ -11,7 +11,7 @@ void init() {
   t++;
 }
 
-void dfs(int cur) {  // cur表示当前
+void dfs(int cur) {    // cur表示当前
   if (cur == n + 1) {  //如果但前 == n+1则返回结果为真
     flag = 1;
     for (int i = 0; i < 4; i++) {  //打印结果
