@@ -4,16 +4,12 @@
 using namespace std;
 const int N = 100000;
 bool Num[N];
-int main(void)
-{
-    int n;
+int main(void) {
+  int n;
 
-    while(cin>>n)
-    {
-        printf((n & n - 1) ? "NO\n" : "YES\n");
-    }
+  while (cin >> n) {
+    printf((n & n - 1) ? "NO\n" : "YES\n");
+  }
 
-    return 0;
+  return 0;
 }
-
-
