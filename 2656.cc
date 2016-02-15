@@ -1,14 +1,14 @@
 #include <iostream>
 #include <cstring>
-#include &lt;cstdio&gt;
-#include &lt;cstdlib&gt;
-#include &lt;cmath&gt;
-#include &lt;climits&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;map&gt;
-#include &lt;vector&gt;
-#include &lt;algorithm&gt;
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
+#include <climits>
+#include <queue>
+#include <stack>
+#include <map>
+#include <vector>
+#include <algorithm>
 using namespace std;
 
 int main()
