@@ -4,7 +4,7 @@
 #include <sstream>
 #include <iostream>
 
-using namespace std;
+using namespace std; 
 
 int func(int number){
   int sum = 1;
@@ -13,20 +13,20 @@ int func(int number){
   }
   int reg = sqrt((double)number);
   if( reg * reg == number){
-    sum += reg;
+    sum += reg; 
   }
   if( sum == number) return 0 ;
-  if (sum > number) return 2;
-
+  if (sum > number) return 2;   
+ 
   return 1;
-
+  
 }
 
 int main(){
   //15 28 6 56 60000 22 496 0
   puts("PERFECTION OUTPUT");
   while(true){
-    int number;
+    int number; 
     scanf("%d", &number);
     if(number == 0) break;
     if(number == 1 ) {printf( "%5d  ", number); puts("DEFICIENT"); continue;}
@@ -37,7 +37,7 @@ int main(){
   }
   puts("END OF OUTPUT");
 
-
-
+  
+  
   return 0;
 }
