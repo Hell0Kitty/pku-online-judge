@@ -1,6 +1,7 @@
 #include<iostream>
 #include<stdlib.h>
 #include<stdio.h>
+#include <memory.h>
 using namespace std;
 struct ParallelXLine
 {
