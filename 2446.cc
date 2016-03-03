@@ -1,79 +1,61 @@
 #include <stdio.h>
-#include <memory.h>
-int m, n, k, r, i, j, p, q, black, white, graph[34][34];
-bool map[600][600];
-bool ck[600];
-int match[600];
-int tmp, answer;
-bool search(int k) {
-  int i, t;
-  for (i = 1; i <= q; i++)
-    if (map[k][i] && ck[i]) {
-      ck[i] = false;
-      t = match[i];
-      if (t == -1 || search(t)) {
-        match[i] = k;
-        return true;
+#include <string.h>
+
+#define MAXN 1089
+int cnt, g[MAXN][MAXN];
+int cx[MAXN], cy[MAXN], vis[MAXN];
+
+int dfs(int& u) {
+  for (int v = 1; v <= cnt; v++)
+    if (g[u][v] && !vis[v]) {
+      vis[v] = 1;
+      if (!~cy[v] || dfs(cy[v])) {
+        cx[u] = v;
+        cy[v] = u;
+        return 1;
       }
-      match[i] = t;
     }
-  return false;
+  return 0;
 }
-int hungary() {
-  answer = 0;
-  for (j = 1; j <= q; j++) match[j] = -1;
-  for (i = 1; i <= p; i++) {
-    memset(ck, true, sizeof(ck));
-    if (search(i)) answer++;
-  }
-  return answer;
+int MaxMatch() {
+  int res = 0;
+  memset(cx, 0xff, sizeof(cx));
+  memset(cy, 0xff, sizeof(cy));
+  for (int u = 1; u <= cnt; u++)
+    if (!~cx[u]) {
+      memset(vis, 0, sizeof(vis));
+      res += dfs(u);
+    }
+  return res;
 }
+int index[33][33];
 int main() {
-  for (i = 0; i <= m + 1; i++) graph[i][0] = graph[i][n + 1] = 0;
-  for (j = 0; j <= n + 1; j++) graph[0][j] = graph[m + 1][j] = 0;
-  while (scanf("%d%d%d", &m, &n, &k) != EOF) {
-    if ((m * n - k) % 2 == 1) {
-      while (k--) {
-        scanf("%d%d", &j, &i);
-      }
-      printf("NO\n");
+  int m, n, k, x, y;
+  while (~scanf("%d%d%d", &m, &n, &k)) {
+    int hole[33][33] = {0};
+    memset(g, 0, sizeof(g));
+    for (int i = 0; i < k; i++) scanf("%d%d", &x, &y), hole[y][x] = 1;
+    if ((m * n - k) & 1) {
+      puts("NO");
       continue;
-    } else {
-      r = (m * n - k) / 2;
-      if (m % 2 == 1 && n % 2 == 1) {
-        q = m * n / 2;
-        p = q + 1;
-      } else
-        p = q = m * n / 2;
     }
-    black = 1;
-    white = -1;
-    for (i = 1; i <= m; i++) {
-      if (i % 2 == 1) {
-        for (j = 1; j <= n; j += 2) graph[i][j] = (black++);
-        for (j = 2; j <= n; j += 2) graph[i][j] = (white--);
-      } else {
-        for (j = 1; j <= n; j += 2) graph[i][j] = (white--);
-        for (j = 2; j <= n; j += 2) graph[i][j] = (black++);
-      }
-    }
-    while (k--) {
-      scanf("%d%d", &j, &i);
-      graph[i][j] = 0;
-    }
-    for (i = 1; i <= p; i++)
-      for (j = 1; j <= q; j++) map[i][j] = false;
-    for (i = 1; i <= m; i++)
-      for (j = 1; j <= n; j++)
-        if (graph[i][j] > 0) {
-          if (graph[i - 1][j] < 0) map[graph[i][j]][-graph[i - 1][j]] = true;
-          if (graph[i + 1][j] < 0) map[graph[i][j]][-graph[i + 1][j]] = true;
-          if (graph[i][j + 1] < 0) map[graph[i][j]][-graph[i][j + 1]] = true;
-          if (graph[i][j - 1] < 0) map[graph[i][j]][-graph[i][j - 1]] = true;
+    cnt = 0;
+    for (int i = 1; i <= m; i++)
+      for (int j = 1; j <= n; j++)
+        if (!hole[i][j]) index[i][j] = ++cnt;
+    for (int i = 1; i <= m; i++)
+      for (int j = 1; j <= n; j++)
+        if (!hole[i][j]) {
+          if (i - 1 >= 1 && !hole[i - 1][j])
+            g[index[i][j]][index[i - 1][j]] = 1;
+          if (j + 1 <= n && !hole[i][j + 1])
+            g[index[i][j]][index[i][j + 1]] = 1;
+          if (i + 1 <= m && !hole[i + 1][j])
+            g[index[i][j]][index[i + 1][j]] = 1;
+          if (j - 1 >= 1 && !hole[i][j - 1])
+            g[index[i][j]][index[i][j - 1]] = 1;
         }
-    if (hungary() >= r)
-      printf("YES\n");
-    else
-      printf("NO\n");
+    puts(MaxMatch() == cnt ? "YES" : "NO");
   }
+  return 0;
 }
