@@ -1,4 +1,4 @@
-mport java.io.*;
+import java.io.*;
 public class Main
 {
  static int[][] map=new int[10][10];
