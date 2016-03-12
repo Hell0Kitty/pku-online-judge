@@ -1,41 +1,55 @@
-#include <iostream>
-#include <cstdio>
-#include <cstring>
+#include<iostream>
+#include<cstdio>
+#include<cstring>
 using namespace std;
 
-void get__next(char *p, int *_next) {
+void get__next(char* p, int* _next)
+{
   int k = -1;
   int j = 0;
   _next[0] = -1;
   int len = strlen(p);
-  while (j < len) {
-    if (k == -1 || p[j] == p[k]) {
+  while (j < len)
+  {
+    if (k == -1 || p[j] == p[k])
+    {
       j++;
       k++;
-      if (p[j] != p[k]) {
+      if (p[j] != p[k])
+      {
         _next[j] = k;
-      } else {
+      }
+      else
+      {
         _next[j] = _next[k];
       }
-    } else {
+    }
+    else
+    {
       k = _next[k];
     }
   }
 }
 
-int kmp(char *p, char *t, int *_next) {
+int kmp(char* p, char* t, int* _next)
+{
   int ans = 0;
   int plen = strlen(p);
   int tlen = strlen(t);
   int i = 0, j = 0;
-  while (i < tlen) {
-    if (j == -1 || p[j] == t[i]) {
+  while (i < tlen)
+  {
+    if (j == -1 || p[j] == t[i])
+    {
       i++;
       j++;
-    } else {
+    }
+    else
+    {
       j = _next[j];
     }
-    if (j == plen) {
+    if (j == plen)
+    {
       ans++;
       j = _next[j];
     }
@@ -44,10 +58,12 @@ int kmp(char *p, char *t, int *_next) {
 }
 char t[1000010], p[1000010];
 int _next[1000010];
-int main() {
+int main()
+{
   int n;
   scanf("%d", &n);
-  while (n--) {
+  while (n--)
+  {
     scanf("%s", p);
     scanf("%s", t);
     get__next(p, _next);
