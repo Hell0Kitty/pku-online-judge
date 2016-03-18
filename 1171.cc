@@ -1,57 +1,87 @@
+#include <iostream>
+#include <cstdlib>
+#include <cstring>
+#include <cstdio>
+using namespace std;
 
-#include "stdio.h"
-#include "string.h"
-#define M 40005
+char pre1[30] = "qwertyuiopasdfghjklzxcvbnm";
+int pre2[30] =
+{ 7, 6, 1, 2, 2, 5, 4, 1, 3, 5, 2, 1, 4, 6, 5, 5, 7, 6, 3, 7, 7, 4, 6, 5, 2, 5 };
+int value[300];
+char collected[10];
+char word[40005][10];
+int n, ans;
 
-int a[26], ans[26], w[M][26], n;
-int max = 0;
-int v[] = {2, 5, 4, 4, 1, 6, 5, 5, 1, 7, 6, 3, 5,
-           2, 3, 5, 7, 2, 1, 2, 4, 6, 6, 7, 5, 7};
-
-void dfs(int beg, int value, int c) {
-  int i, j, va;
-  if (c == 0) {
-    if (value > max) max = value;
-  }
-  if (beg == n) return;
-  for (i = beg; i < n; i++) {
-    for (j = 0; j < 26; j++) {
-      if (w[i][j] > a[j]) break;
-    }
-    if (j == 26) {
-      va = value;
-      for (j = 0; j < 26; j++) {
-        a[j] -= w[i][j];
-        va += w[i][j] * v[j];
-      }
-      dfs(i + 1, va, c - 1);
-      for (j = 0; j < 26; j++) a[j] += w[i][j];
-    }
-  }
+int cal(char * st, int len)
+{
+    int ret = 0;
+    for (int i = 0; i < len; i++)
+        ret += value[st[i]];
+    return ret;
 }
 
-int main() {
-  int i, j;
-  char s[10];
-  memset(a, 0, sizeof(a));
-  memset(ans, 0, sizeof(ans));
-  memset(w, 0, sizeof(w));
-  n = 0;
-  scanf("%s", s);
-  for (i = 0; s[i] != 0; i++) {
-    a[s[i] - 'a']++;
-  }
-  while (1) {
-    scanf("%s", s);
-    if (strcmp(s, ".") == 0) break;
-    for (i = 0; s[i] != 0; i++) {
-      w[n][s[i] - 'a']++;
+bool ok(char *a, char *b)
+{
+    int len1 = strlen(a);
+    int len2 = strlen(b);
+    int len = strlen(collected);
+    if (len1 + len2 > len)
+        return false;
+    bool vis[10];
+    memset(vis, 0, sizeof(vis));
+    for (int i = 0; i < len1; i++)
+    {
+        bool did = false;
+        for (int j = 0; j < len; j++)
+            if (collected[j] == a[i] && !vis[j])
+            {
+                vis[j] = true;
+                did = true;
+                break;
+            }
+        if (!did)
+            return false;
     }
-    n++;
-  }
-  for (i = 1; i < 3; i++) {
-    dfs(0, 0, i);
-  }
-  printf("%d\n", max);
-  return 0;
+    for (int i = 0; i < len2; i++)
+    {
+        bool did = false;
+        for (int j = 0; j < len; j++)
+            if (collected[j] == b[i] && !vis[j])
+            {
+                vis[j] = true;
+                did = true;
+                break;
+            }
+        if (!did)
+            return false;
+    }
+    return true;
 }
+
+int main()
+{
+    for (int i = 0; i < 26; i++)
+        value[pre1[i]] = pre2[i];
+    scanf("%s", collected);
+    int lenc = strlen(collected);
+    char now[10];
+    n = 0;
+    ans = 0;
+    while (scanf("%s", now), strcmp(".", now))
+    {
+        int len = strlen(now);
+        if (len > lenc || !ok(now, ""))
+            continue;
+        ans = max(ans, cal(now, len));
+        if (len <= lenc / 2 + (lenc & 1))
+            strcpy(word[n++], now);
+    }
+    for (int i = 0; i < n - 1; i++)
+        for (int j = i; j < n; j++)
+            if (ok(word[i], word[j]))
+                ans = max(ans, cal(word[i], strlen(word[i])) + cal(word[j], strlen(word[j])));
+    printf("%d\n", ans);
+    return 0;
+}
+
+
