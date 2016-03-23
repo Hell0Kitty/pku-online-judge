@@ -1,7 +1,6 @@
-nclude &lt;
-iostream &gt;
-#include &lt; stack & gt;
-#include &lt; vector & gt;
+#include <iostream>
+#include <stack>
+#include <vector>
 #define max(x, y) ((x)&gt; (y) ? (x) : (y))
 using namespace std;
 struct Node {
