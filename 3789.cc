@@ -8,12 +8,12 @@
 #include <cstring>
 #include <stack>
 #include <cctype>
-#include <utility>   
+#include <utility>
 #include <map>
-#include <string>  
-#include <climits> 
+#include <string>
+#include <climits>
 #include <set>
-#include <string> 
+#include <string>
 #include <sstream>
 #include <utility>
 #include <ctime>
@@ -39,33 +39,29 @@ using std::greater;
 
 int arr[3];
 
-int main()
-{
-	int T;
-	int n_case = 0;
-	scanf("%d", &T);
-	while(T--)
-	{
-		scanf("%d", arr);
-		while(getchar() != ':');
+int main() {
+  int T;
+  int n_case = 0;
+  scanf("%d", &T);
+  while (T--) {
+    scanf("%d", arr);
+    while (getchar() != ':')
+      ;
 
-		scanf("%d", arr+1);
-		while(getchar() != ':');
+    scanf("%d", arr + 1);
+    while (getchar() != ':')
+      ;
 
-		scanf("%d", arr+2);
+    scanf("%d", arr + 2);
 
-		printf("%d ", ++n_case);
-		for(int i = 5; i >= 0; --i)
-			for(int j = 0; j < 3; ++j)
-				printf("%c", ((1 << i)&arr[j])? '1': '0');
-		printf(" ");
-		for(int i = 0; i < 3; ++i)
-			for(int j = 5; j >= 0; --j)
-				printf("%c", ((1 << j)&arr[i])? '1': '0');
-		printf("\n");
-	}
-	return 0;
+    printf("%d ", ++n_case);
+    for (int i = 5; i >= 0; --i)
+      for (int j = 0; j < 3; ++j) printf("%c", ((1 << i) & arr[j]) ? '1' : '0');
+    printf(" ");
+    for (int i = 0; i < 3; ++i)
+      for (int j = 5; j >= 0; --j)
+        printf("%c", ((1 << j) & arr[i]) ? '1' : '0');
+    printf("\n");
+  }
+  return 0;
 }
-
-
-
