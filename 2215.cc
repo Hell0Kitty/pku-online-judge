@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cstdio>
-    using namespace std;
+using namespace std;
 
 int maze[1010][1010];
 
