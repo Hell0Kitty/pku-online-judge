@@ -16,10 +16,10 @@ long long (*m1)[MAX_N], (*m2)[MAX_N];
 
 class ACAutomaton {
  public:
-  int n;            //当前结点总数
-  int id['Z' + 1];  //字母x对应的结点编号为id[x]
-  int fail[MAX_N];  // fail指针
-  bool tag[MAX_N];  //本题所需
+  int n;                     //当前结点总数
+  int id['Z' + 1];           //字母x对应的结点编号为id[x]
+  int fail[MAX_N];           // fail指针
+  bool tag[MAX_N];           //本题所需
   int trie[MAX_N][CLD_NUM];  // trie tree
 
   void init() {
