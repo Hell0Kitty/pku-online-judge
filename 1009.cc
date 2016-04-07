@@ -7,18 +7,18 @@
 using namespace std;
 
 const int size = 1000;  //每幅图片的pair上限
-int width;  // Map的宽
-int total = 0;  //像素点总个数
+int width;              // Map的宽
+int total = 0;          //像素点总个数
 
 typedef class OutMapPix {
  public:
-  int pos;  // OutMap中每个像素点的顺序位置，pos从1开始
+  int pos;   // OutMap中每个像素点的顺序位置，pos从1开始
   int code;  // OutMap中每个像素点对应InMap的编码
 } Pix;
 
 int InMapPair
     [size]
-    [2];  // InMapPair[][0]为像素值，InMapPair[][1]为InMapPair[][0]连续出现的个数
+    [2];               // InMapPair[][0]为像素值，InMapPair[][1]为InMapPair[][0]连续出现的个数
 Pix OutMap[size * 8];  //每个pix都依赖其周围的8个点编码
 
 int cmp(const void* a, const void* b);  //快排比较规则
@@ -39,7 +39,7 @@ int main(int k) {
     cout << width << endl;
 
     int pos = 1;  //当前处理的像素点的位置
-    k = 0;  // OutMap[]指针
+    k = 0;        // OutMap[]指针
     for (int p = 0; p <= PairNum; p++) {
       int row = (pos - 1) / width;  //得到pos在二维图对应的坐标
       int col = (pos - 1) % width;
