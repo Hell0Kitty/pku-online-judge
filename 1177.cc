@@ -1,105 +1,206 @@
-Source Code
-
-    Problem : 1177 User : freebsdx Memory : 572K Time : 16MS Language
-                          : G++ Result : Accepted Source Code
 #include <stdio.h>
-#include <math.h>
+#include <iostream>
 #include <algorithm>
-#define L(x) (x << 1)
-#define R(x) ((x << 1) + 1)
-#define M 5050
-                                         using namespace std;
+using namespace std;
+#define MAX_REC_NUM 5005
+#define MAX_INTERVAL MAX_REC_NUM * 2
 
-struct tree {
-  int l, r;
-  int lb, rb;  //左右端点是否被覆盖
-  int count, line,
-      len;  // count 被覆盖的次数  line 所包含区间的数量 len 是区间长度（测度）
-} node[M * 3];
-
-struct data {
-  int x, y1, y2;
-  int flag;  // flag 1表示为入边，-1表示为出边
-} seg[M * 2];
-
-int y[M * 2];  //记录y坐标
-
-bool cmp(data a, data b)  // x升序 x相同时 入边在前
+struct Node
 {
-  if (a.x < b.x) return true;
-  if (a.x == b.x && a.flag > b.flag) return true;
-  return false;
-}
-void BuildTree(int left, int right, int u) {
-  node[u].l = left;
-  node[u].r = right;
-  node[u].len = node[u].line = node[u].count = 0;
-  if (left + 1 == right) return;
-  int mid = (left + right) >> 1;
-  BuildTree(left, mid, L(u));
-  BuildTree(mid, right, R(u));
-}
-void updata(int u)  //更新测度 和 line的值
-{                   //获得以当前接点为根的树被覆盖的区间总长度 被覆盖区间的总数
-  if (node[u].count > 0)
+    int    l, r;
+    Node    *pleft, *pright;
+    int    num;
+    bool    to_left, to_right;    
+    int    edge_num;
+};
 
-  {
-    node[u].len = y[node[u].r] - y[node[u].l];
-    node[u].line = node[u].lb = node[u].rb = 1;
-  } else if (node[u].l + 1 == node[u].r) {
-    node[u].len = 0;
-    node[u].line = node[u].lb = node[u].rb = 0;
-  } else  //由左右结点的值 确定父亲结点的值
-  {
-    node[u].len = node[L(u)].len + node[R(u)].len;
-    node[u].lb = node[L(u)].lb;
-    node[u].rb = node[R(u)].rb;
-    node[u].line =
-        node[L(u)].line + node[R(u)].line - node[L(u)].rb * node[R(u)].lb;
-  }
-}
-void query(int left, int right, int flag, int u) {
-  if (y[node[u].l] == left && y[node[u].r] == right) {
-    node[u].count += flag;
-    updata(u);
-    return;
-  }
-  int mid = y[(node[u].l + node[u].r) >> 1];
-  if (right <= mid)
-    query(left, right, flag, L(u));
-  else if (left >= mid)
-    query(left, right, flag, R(u));
-  else {
-    query(left, mid, flag, L(u));
-    query(mid, right, flag, R(u));
-  }
-  updata(u);
-}
-int main() {
-  int n, m, i, j;
-  int x1, y1, x2, y2;
-  while (~scanf("%d", &n)) {
-    m = 0;
-    for (i = 0; i < n; i++) {
-      scanf("%d%d%d%d", &x1, &y1, &x2, &y2);
-      seg[m].x = x1, seg[m].y1 = y1, seg[m].y2 = y2;
-      seg[m].flag = 1, y[m++] = y1;
-      seg[m].x = x2, seg[m].y1 = y1, seg[m].y2 = y2;
-      seg[m].flag = -1, y[m++] = y2;
+int    node_cnt;
+Node    tree[MAX_INTERVAL * 3];
+
+struct Interval
+{
+    int start, end;
+    int pos;
+    int value;
+    Interval()
+    {}
+    Interval(int start, int end, int pos, int value):start(start), end(end), pos(pos), value(value)
+    {}
+    bool operator < (const Interval &a)const
+    {
+        if (pos != a.pos)
+            return pos < a.pos;
+        return value > a.value;
     }
-    sort(y, y + m);
-    sort(seg, seg + m, cmp);
-    int cnt = unique(y, y + m) - y;  //离散化
-    BuildTree(0, cnt - 1, 1);
-    int pmt = 0, now_m = 0, now_l = 0;  // pmt 周长
-    for (i = 0; i < m; i++) {
-      query(seg[i].y1, seg[i].y2, seg[i].flag, 1);
-      if (i > 0) pmt += 2 * now_l * (seg[i].x - seg[i - 1].x);  //水平x的长度
-      pmt += fabs(node[1].len - now_m);                         // y的长度
-      now_m = node[1].len;
-      now_l = node[1].line;
-    }
-    printf("%d\n", pmt);
-  }
-  return 0;
+}interval[MAX_REC_NUM * 2];
+
+struct Rectangle
+{
+    int l, d, u, r;
+}rec[MAX_REC_NUM];
+
+int discrete[MAX_REC_NUM * 2];
+int discrete_num;
+int rec_num;
+int interval_num;
+
+int get_index(int a)
+{
+    return lower_bound(discrete, discrete + discrete_num, a) - discrete;
 }
+
+void discretization(int discrete[], int &discrete_num)
+{
+    sort(discrete, discrete + discrete_num);
+    discrete_num = unique(discrete, discrete + discrete_num) - discrete;
+}
+
+void input()
+{
+    scanf("%d", &rec_num);
+    for (int i = 0; i < rec_num; i++)
+    {
+        int l, d, r, u;
+        scanf("%d%d%d%d", &l, &d, &r, &u);
+        rec[i].l = l;
+        rec[i].r = r;
+        rec[i].u = u;
+        rec[i].d = d;
+    }
+}
+
+void make_xscan()
+{
+    discrete_num = 0;
+    interval_num = 0;
+    for (int i = 0; i < rec_num; i++)
+    {
+        int l, d, r, u;
+        l = rec[i].l;
+        r = rec[i].r;
+        u = rec[i].u;
+        d = rec[i].d;
+        interval[interval_num++] = Interval(d, u, l, 1);
+        interval[interval_num++] = Interval(d, u, r, -1);
+        discrete[discrete_num++] = u;
+        discrete[discrete_num++] = d;
+    }
+}
+
+void make_yscan()
+{
+    discrete_num = 0;
+    interval_num = 0;
+    for (int i = 0; i < rec_num; i++)
+    {
+        int l, d, r, u;
+        l = rec[i].l;
+        r = rec[i].r;
+        u = rec[i].u;
+        d = rec[i].d;
+        interval[interval_num++] = Interval(l, r, d, 1);
+        interval[interval_num++] = Interval(l, r, u, -1);
+        discrete[discrete_num++] = l;
+        discrete[discrete_num++] = r;
+    }
+}
+
+void buildtree(Node *proot, int s, int e)
+{
+    proot->l = s;
+    proot->r = e;
+    proot->to_left = false;
+    proot->to_right = false;
+    proot->num = 0;
+    proot->edge_num = 0;
+    if (s == e)
+    {
+        proot->pleft = proot->pright = NULL;
+        return;
+    }
+    node_cnt++;
+    proot->pleft = tree + node_cnt;
+    node_cnt++;
+    proot->pright = tree + node_cnt;
+    buildtree(proot->pleft, s, (s + e) / 2);
+    buildtree(proot->pright, (s + e) / 2 + 1, e);
+}
+
+void recount(Node *p)
+{
+    if (p->num > 0)
+    {
+        p->edge_num = 0;
+        p->to_right = p->to_left = true;
+        return;
+    }
+    if (p->pleft == NULL || p->pright == NULL)
+    {
+        p->edge_num = 0;
+        p->to_right = p->to_left = false;
+        return;
+    }
+    p->to_left = p->pleft->to_left;
+    p->to_right = p->pright->to_right;
+    p->edge_num = p->pleft->edge_num + p->pright->edge_num;
+    if (p->pleft->to_right != p->pright->to_left)
+        p->edge_num++;
+}
+
+void insert(Node *proot, int s, int e, int value)
+{
+    if (s > proot->r || e < proot->l)
+        return;
+    s = max(s, proot->l);
+    e = min(e, proot->r);
+    if (s == proot->l && e == proot->r)
+    {
+        proot->num += value;
+        recount(proot);
+        return;
+    }
+    insert(proot->pleft, s, e, value);
+    insert(proot->pright, s, e, value);
+    recount(proot);
+}
+
+long long work()
+{
+    long long ans = 0;
+    for (int i = 0; i < interval_num; i++)
+    {
+        int s = get_index(interval[i].start);
+        int e = get_index(interval[i].end) - 1;
+        insert(tree, s, e, interval[i].value);
+        long long line_num = tree->edge_num;
+        if (tree->to_left)
+            line_num++;
+        if (tree->to_right)
+            line_num++;
+        if (i != interval_num - 1)
+            ans += (interval[i + 1].pos - interval[i].pos) * line_num;
+    }
+    return ans;
+}
+
+int main()
+{
+    input();
+    long long ans = 0;
+    make_xscan();
+    sort(interval, interval + interval_num);
+    discretization(discrete, discrete_num);
+    buildtree(tree, 0, discrete_num);
+    ans += work();
+
+    make_yscan();
+    sort(interval, interval + interval_num);
+    discretization(discrete, discrete_num);
+    buildtree(tree, 0, discrete_num);
+    ans += work();
+
+    printf("%lld\n", ans);
+    return 0;
+}
+
+
