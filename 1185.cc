@@ -5,8 +5,8 @@
 using namespace std;
 int dp[105][65][65];  // d[i][j][k]: “第i行状态是s[j]，第i-1行状态是s[k]”的
 int s[105];  //一行的状态选择s[0], s[1], ... , s[k-1]
-int n, m;  // n行×m列
-int k;  //一行的所有状态数
+int n, m;    // n行×m列
+int k;       //一行的所有状态数
 int map[105];  //'H''P'地图map[0]~map[n-1]，地图每一行map[line]: 1001 表示HPPH
 int sum[105];
 
