@@ -95,7 +95,7 @@ int main() {
     for (i = 0; i < m; i++) {
       query(seg[i].y1, seg[i].y2, seg[i].flag, 1);
       if (i > 0) pmt += 2 * now_l * (seg[i].x - seg[i - 1].x);  //水平x的长度
-      pmt += fabs(node[1].len - now_m);  // y的长度
+      pmt += fabs(node[1].len - now_m);                         // y的长度
       now_m = node[1].len;
       now_l = node[1].line;
     }
