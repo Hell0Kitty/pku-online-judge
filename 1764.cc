@@ -82,8 +82,8 @@ void generate() {
   }
 }
 
-#define foreach (i, v) \
-  for (__typeof((v).begin()) i = (v).begin(); i != ((v).end()); ++i)
+#define foreach \
+  (i, v) for (__typeof((v).begin()) i = (v).begin(); i != ((v).end()); ++i)
 typedef long long int64;
 int64 dist[enough_x * 96];
 const int64 inf = (int64)(1e16);
