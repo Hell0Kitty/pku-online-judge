@@ -79,7 +79,8 @@ void proc(string& word) {
         //	cout << "[dbg] now go down" << endl;
         for (t = 0; t < word.size(); ++t) {
           if (word[t] == matrix[round(i + t)][j]) {
-            //		cout << "[dbg] current coordinate: " << round(i+t) << " "
+            //		cout << "[dbg] current coordinate: " << round(i+t) << "
+            //"
             //<<
             // j
             //<< endl;
