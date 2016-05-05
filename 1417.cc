@@ -28,7 +28,7 @@ int pre[N], r[N];
 int p1, p2, p;
 bool vis[N];
 int dp[N][N / 2];
-int cnt;  //最后分为几个集合
+int cnt;      //最后分为几个集合
 int a[N][2];  // a[i][0],a[i][1]分别表示把第i个集合分成的两个部分
 vector<int> b[N][2];
 int find(int x) {
