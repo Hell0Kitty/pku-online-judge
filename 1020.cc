@@ -22,7 +22,7 @@ bool DFS(int a) {
         cake[i]--;  //这个就是典型的DFS算法的了
         for (t = lie; t <= lie + i - 1; t++) pos[t] = pos[t] + i;
         if (DFS(a + 1)) return true;  // I GET THE WA HERE
-        cake[i]++;  //回溯部分的算法
+        cake[i]++;                    //回溯部分的算法
         for (t = lie; t <= lie + i - 1; t++) pos[t] = pos[t] - i;
       }
     }
