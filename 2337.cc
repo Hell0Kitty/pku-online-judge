@@ -9,15 +9,16 @@ struct Node {
   int to;
   bool vis;
   char word[20 + 1];
-  Node () { to = -1; vis = false; }
-  bool operator < (const Node &rhs) const {
-    return strcmp(word, rhs.word) < 0;
+  Node() {
+    to = -1;
+    vis = false;
   }
+  bool operator<(const Node &rhs) const { return strcmp(word, rhs.word) < 0; }
 };
 
 const int maxn = 26;
 vector<Node> G[maxn];
-stack<char*> s;
+stack<char *> s;
 bool used[maxn];
 int in[maxn], out[maxn], n, p[maxn], start;
 char input[20 + 3];
@@ -33,21 +34,21 @@ void init() {
   while (!s.empty()) s.pop();
 }
 
-int find(int x) {
-  return x == p[x] ? x : p[x] = find(p[x]);
-}
+int find(int x) { return x == p[x] ? x : p[x] = find(p[x]); }
 
 void Union(int x, int y) {
   int fx = find(x), fy = find(y);
   if (fx != fy) p[fx] = fy;
 }
 
-void add_edge(char* str) {
+void add_edge(char *str) {
   int ll = strlen(str) - 1;
   int from = str[0] - 'a', to = str[ll] - 'a';
-  in[to]++; out[from]++;
+  in[to]++;
+  out[from]++;
   used[from] = used[to] = true;
-  Node e; e.to = to;
+  Node e;
+  e.to = to;
   strcpy(e.word, str);
   G[from].push_back(e);
 }
@@ -64,22 +65,26 @@ bool pre_euler() {
   for (int i = 0; i < 26; i++) {
     if (used[i]) {
       if (in[i] == out[i]) continue;
-      if (in[i] - out[i] == 1) ru++;
+      if (in[i] - out[i] == 1)
+        ru++;
       else if (out[i] - in[i] == 1) {
-        chu++; start = i;
-      }
-      else return false;
+        chu++;
+        start = i;
+      } else
+        return false;
     }
   }
   if (!ru && !chu) {
     for (int i = 0; i < 26; i++)
       if (used[i]) {
-        start = i; break;
+        start = i;
+        break;
       }
     return true;
-  }
-  else if (ru == 1 && chu == 1) return true;
-  else return false;
+  } else if (ru == 1 && chu == 1)
+    return true;
+  else
+    return false;
 }
 
 void euler(int u) {
@@ -133,6 +138,3 @@ int main() {
   }
   return 0;
 }
-
-
-
