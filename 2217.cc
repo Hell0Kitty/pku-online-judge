@@ -9,7 +9,7 @@
 #define MAXN 10010
 #define INF 0x80000000
 
-    using namespace std;
+using namespace std;
 
 int n, k;
 
