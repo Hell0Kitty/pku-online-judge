@@ -22,7 +22,7 @@ bool v[MAX_N + 1][MAX_N +
 int dir[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};  //遍历的四个方向
 
 map<string, int> load;  //记录输入里每个entrance/exit对的load总和，对于AB 2 BA
-                        //1，要把BA转换成AB，所以最终是AB 3
+// 1，要把BA转换成AB，所以最终是AB 3
 map<string, int>::iterator itr;
 
 int rowN, colN, srcR, srcC, destR, destC, pathNum,
