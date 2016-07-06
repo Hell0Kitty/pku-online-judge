@@ -1,33 +1,36 @@
-
 #include <stdio.h>
 #include <string.h>
-char str[1000000];
-bool hash[16000000] = {false};
-int ansi[256] = {0};
+#include <stdlib.h>
+#include <iostream>
+using namespace std;
+#define maxn 16000000
+
+char s[maxn];
+int a[10000];
+int hash[maxn];
 
 int main() {
-  int N, NC, ans = 0;
-  scanf("%d%d%s", &N, &NC, str);
-  for (char *s = str; *s; ++s) {  //*s 不是 s
-    ansi[*s] = 1;                 //如果字母出现过，赋值为1
+  int N, NC, num = 0, len, i, cnt = 0, sum = 0, j;
+  scanf("%d%d", &N, &NC);
+  scanf("%s", &s);
+
+  len = strlen(s);
+
+  for (i = 0; i < len; i++)  // ascll码作为下标
+  {
+    if (!a[s[i]]) a[s[i]] = ++num;
   }
-  int cnt = 0;
-  for (int i = 0; i < 256; ++i) {
-    if (ansi[i]) ansi[i] = cnt++;  //从0开始编号
-  }
-  int len = strlen(str);
-  for (int i = 0; i < len - N + 1; ++i) {
-    int key = 0;
-    for (int j = 0; j < N; ++j) {
-      key = key * NC + ansi[str[i + j]];  //转换成NC进制
-      // printf("%d\n",ansi[str[i + j]]);
-    }
-    // printf("key=%d\n",key);
-    if (!hash[key]) {
-      ans++;
-      hash[key] = true;
+
+  for (i = 0; i < len - N + 1; i++) {
+    sum = 0;
+    for (j = i; j < i + N; j++) sum += sum * NC + a[s[j]];
+
+    if (!hash[sum]) {  // hash表
+      cnt++;
+      hash[sum] = 1;
     }
   }
-  printf("%d\n", ans);
+
+  printf("%d\n", cnt);
   return 0;
 }
