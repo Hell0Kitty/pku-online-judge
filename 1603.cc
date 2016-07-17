@@ -3,8 +3,8 @@ using namespace std;
 #define Max 21
 int map[Max][Max];
 void floyd() {
-  for (int m = 1; m <= 20; m++)  // m代表mid,即中间的点
-    for (int b = 1; b <= 20; b++)  // b代表begin,即开始的点
+  for (int m = 1; m <= 20; m++)      // m代表mid,即中间的点
+    for (int b = 1; b <= 20; b++)    // b代表begin,即开始的点
       for (int e = 1; e <= 20; e++)  // e代表end,即结束的点
         if (map[b][e] > map[b][m] + map[m][e])
           map[b][e] = map[b][m] + map[m][e];
