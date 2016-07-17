@@ -17,12 +17,12 @@ struct Edge {
   int to, next;
 } edge[MAXN * 2];
 int head[MAXN], tot;
-int top[MAXN];  // top[v]表示v所在的重链的顶端节点
+int top[MAXN];   // top[v]表示v所在的重链的顶端节点
 int fa[MAXN];    //父亲节点
 int deep[MAXN];  //深度
-int num[MAXN];  // num[v]表示以v为根的子树的节点数
-int p[MAXN];  // p[v]表示v与其父亲节点的连边在线段树中的位置
-int fp[MAXN];   //和p数组相反
+int num[MAXN];   // num[v]表示以v为根的子树的节点数
+int p[MAXN];   // p[v]表示v与其父亲节点的连边在线段树中的位置
+int fp[MAXN];  //和p数组相反
 int son[MAXN];  //重儿子
 int pos;
 void init() {
