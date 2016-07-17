@@ -12,154 +12,120 @@ using namespace std;
 
 struct Snow
 
-{
+    {
+  int arm[6];
 
-    int arm[6];
-
-    Snow *next;
-
+  Snow *next;
 };
 
-Snow * snow[maxn];
+Snow *snow[maxn];
 
 bool same(Snow &a, Snow &b)
 
 {
+  for (int i = 0; i < 6; i++)
 
-    for (int i = 0; i < 6; i++)
+  {
+    bool ok = true;
 
-    {
+    for (int j = 0; j < 6; j++)
 
-        bool ok = true;
+      if (a.arm[j] != b.arm[(j + i) % 6])
 
-        for (int j = 0; j < 6; j++)
+      {
+        ok = false;
 
-            if (a.arm[j] != b.arm[(j + i) % 6])
+        break;
+      }
 
-            {
+    if (ok) return true;
+  }
 
-                ok = false;
+  for (int i = 0; i < 6; i++)
 
-                break;
+  {
+    bool ok = true;
 
-            }
+    for (int j = 0; j < 6; j++)
 
-        if (ok)
+      if (a.arm[j] != b.arm[(i + 6 - j) % 6])
 
-            return true;
+      {
+        ok = false;
 
-    }
+        break;
+      }
 
-    for (int i = 0; i < 6; i++)
+    if (ok) return true;
+  }
 
-    {
-
-        bool ok = true;
-
-        for (int j = 0; j < 6; j++)
-
-            if (a.arm[j] != b.arm[(i + 6 - j) % 6])
-
-            {
-
-                ok = false;
-
-                break;
-
-            }
-
-        if (ok)
-
-            return true;
-
-    }
-
-    return false;
-
+  return false;
 }
 
 bool ins(Snow &a, int index)
 
 {
+  if (snow[index] == 0)
 
-    if (snow[index] == 0)
-
-    {
-
-        a.next = snow[index];
-
-        snow[index] = &a;
-
-        return true;
-
-    }
-
-    Snow *p = snow[index];
-
-    while (p != 0)
-
-    {
-
-        if (same(*p, a))
-
-            return false;
-
-        p = (*p).next;
-
-    }
-
+  {
     a.next = snow[index];
 
     snow[index] = &a;
 
     return true;
+  }
 
+  Snow *p = snow[index];
+
+  while (p != 0)
+
+  {
+    if (same(*p, a)) return false;
+
+    p = (*p).next;
+  }
+
+  a.next = snow[index];
+
+  snow[index] = &a;
+
+  return true;
 }
 
 int main()
 
 {
+  memset(snow, 0, sizeof(snow));
 
-    memset(snow, 0, sizeof(snow));
+  int n;
 
-    int n;
+  scanf("%d", &n);
 
-    scanf("%d", &n);
+  while (n--)
 
-    while (n--)
+  {
+    Snow *temp = new Snow;
+
+    int sum = 0;
+
+    for (int i = 0; i < 6; i++)
 
     {
+      scanf("%d", &(*temp).arm[i]);
 
-        Snow *temp = new Snow;
-
-        int sum = 0;
-
-        for (int i = 0; i < 6; i++)
-
-        {
-
-            scanf("%d", &(*temp).arm[i]);
-
-            sum += (*temp).arm[i];
-
-        }
-
-        if (!ins((*temp), sum % maxn))
-
-        {
-
-            printf("Twin snowflakes found.\n");
-
-            return 0;
-
-        }
-
+      sum += (*temp).arm[i];
     }
 
-    printf("No two snowflakes are alike.\n");
+    if (!ins((*temp), sum % maxn))
 
-    return 0;
+    {
+      printf("Twin snowflakes found.\n");
 
+      return 0;
+    }
+  }
+
+  printf("No two snowflakes are alike.\n");
+
+  return 0;
 }
-
-
