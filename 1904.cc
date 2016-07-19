@@ -1,6 +1,6 @@
-#include& lt; cstdio & gt;
-#include& lt; cstring & gt;
-#include& lt; algorithm & gt;
+#include <cstdio>
+#include <cstring>
+#include <algorithm>
 using namespace std;
 
 const int N = 4000 + 5;
