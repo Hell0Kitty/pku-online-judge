@@ -1,10 +1,10 @@
-#include<iostream>
+#include <iostream>
 
-#include<cstdio>
+#include <cstdio>
 
-#include<cstring>
+#include <cstring>
 
-#include<queue>
+#include <queue>
 
 using namespace std;
 
@@ -12,184 +12,154 @@ using namespace std;
 
 struct node
 
-{
+    {
+  int v;
 
-    int v;
+  int value;
 
-    int value;
-
-    int next;
-
+  int next;
 };
 
-node edge1[1000001],edge2[1000001];
+node edge1[1000001], edge2[1000001];
 
-int head1[1000001],head2[1000001],dist[1000001],visit[1000001];
+int head1[1000001], head2[1000001], dist[1000001], visit[1000001];
 
-queue <int> Q;
+queue<int> Q;
 
 int spfa1(int n)
 
 {
+  int i, j, e;
 
-    int i,j,e;
+  for (i = 1; i <= n; i++) dist[i] = MAX_INT;
 
-    for(i=1;i<=n;i++)
+  memset(visit, 0, sizeof(visit));
 
-        dist[i]=MAX_INT;
+  Q.push(1);
 
-    memset(visit,0,sizeof(visit));
+  visit[1] = 1;
+  dist[1] = 0;
 
-    Q.push(1);
+  while (!Q.empty())
 
-    visit[1]=1; dist[1]=0;
+  {
+    e = Q.front(), Q.pop();
+    visit[e] = 0;
 
-    while(!Q.empty())
+    for (j = head1[e]; j; j = edge1[j].next)
 
-    {
+      if (dist[edge1[j].v] > dist[e] + edge1[j].value)
 
-        e=Q.front(),Q.pop(); visit[e]=0;
+      {
+        dist[edge1[j].v] = dist[e] + edge1[j].value;
 
-        for(j=head1[e];j;j=edge1[j].next)
+        if (!visit[edge1[j].v])
 
-            if(dist[edge1[j].v]>dist[e]+edge1[j].value)
+        {
+          Q.push(edge1[j].v);
 
-            {
+          visit[edge1[j].v] = 1;
+        }
+      }
+  }
 
-                dist[edge1[j].v]=dist[e]+edge1[j].value;
-
-                if(!visit[edge1[j].v])
-
-                {
-
-                    Q.push(edge1[j].v);
-
-                    visit[edge1[j].v]=1;
-
-                }
-
-            }
-
-    }
-
-    return 0;
-
+  return 0;
 }
 
 int spfa2(int n)
 
 {
+  int i, j, e;
 
-    int i,j,e;
+  for (i = 1; i <= n; i++) dist[i] = MAX_INT;
 
-    for(i=1;i<=n;i++)
+  memset(visit, 0, sizeof(visit));
 
-        dist[i]=MAX_INT;
+  Q.push(1);
 
-    memset(visit,0,sizeof(visit));
+  visit[1] = 1;
+  dist[1] = 0;
 
-    Q.push(1);
+  while (!Q.empty())
 
-    visit[1]=1; dist[1]=0;
+  {
+    e = Q.front(), Q.pop();
+    visit[e] = 0;
 
-    while(!Q.empty())
+    for (j = head2[e]; j; j = edge2[j].next)
 
-    {
+      if (dist[edge2[j].v] > dist[e] + edge2[j].value)
 
-        e=Q.front(),Q.pop(); visit[e]=0;
+      {
+        dist[edge2[j].v] = dist[e] + edge2[j].value;
 
-        for(j=head2[e];j;j=edge2[j].next)
+        if (!visit[edge2[j].v])
 
-            if(dist[edge2[j].v]>dist[e]+edge2[j].value)
+        {
+          Q.push(edge2[j].v);
 
-            {
+          visit[edge2[j].v] = 1;
+        }
+      }
+  }
 
-                dist[edge2[j].v]=dist[e]+edge2[j].value;
-
-                if(!visit[edge2[j].v]) 
-
-                {
-
-                    Q.push(edge2[j].v);
-
-                    visit[edge2[j].v]=1;
-
-                }
-
-            }
-
-    }
-
-    return 0;
-
+  return 0;
 }
 
 int main()
 
 {
+  int i, k, m, n, s, t, N, cost;
 
-    int i,k,m,n,s,t,N,cost;
+  __int64 sum;
 
-    __int64 sum;
+  cin >> m;
 
-    cin>>m;
+  while (m--)
 
-    while(m--)
+  {
+    scanf("%d%d", &n, &k);
+
+    memset(head1, 0, sizeof(head1));
+
+    memset(head2, 0, sizeof(head2));
+
+    for (N = 1, i = 0; i < k; i++)
 
     {
+      scanf("%d%d%d", &s, &t, &cost);
 
-        scanf("%d%d",&n,&k);
+      node e = {t, cost, 0};
 
-        memset(head1,0,sizeof(head1));
+      edge1[N] = e;
 
-        memset(head2,0,sizeof(head2));
+      edge1[N].next = head1[s];
 
-        for(N=1,i=0;i<k;i++)
+      head1[s] = N;
 
-        {
+      e.v = s;
 
-            scanf("%d%d%d",&s,&t,&cost);
+      edge2[N] = e;
 
-            node e={t,cost,0};
+      edge2[N].next = head2[t];
 
-            edge1[N]=e;
+      head2[t] = N;
 
-            edge1[N].next=head1[s];
-
-            head1[s]=N;
-
-            e.v=s;
-
-            edge2[N]=e;
-
-            edge2[N].next=head2[t];
-
-            head2[t]=N;
-
-            N++;
-
-        }
-
-        sum=0;
-
-        spfa1(n);
-
-        for(i=1;i<=n;i++)
-
-            sum+=dist[i];
-
-        spfa2(n);
-
-        for(i=1;i<=n;i++)
-
-            sum+=dist[i];
-
-        printf("%I64d\n",sum);
-
+      N++;
     }
 
-    return 0;
+    sum = 0;
 
+    spfa1(n);
+
+    for (i = 1; i <= n; i++) sum += dist[i];
+
+    spfa2(n);
+
+    for (i = 1; i <= n; i++) sum += dist[i];
+
+    printf("%I64d\n", sum);
+  }
+
+  return 0;
 }
-
-
