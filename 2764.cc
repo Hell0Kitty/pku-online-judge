@@ -32,8 +32,8 @@ void _checkmax(T &t, T x) {
 typedef pair<int, int> PII;
 typedef pair<double, double> PDD;
 typedef long long lld;
-#define foreach (it, v) \
-  for (__typeof((v).begin()) it = (v).begin(); it != (v).end(); it++)
+#define foreach \
+  (it, v) for (__typeof((v).begin()) it = (v).begin(); it != (v).end(); it++)
 #define DEBUG(a) cout << #a " = " << (a) << endl;
 #define DEBUGARR(a, n)                               \
   for (int i = 0; i < (n); i++) {                    \
