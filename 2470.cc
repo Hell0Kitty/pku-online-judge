@@ -1,23 +1,23 @@
+#include <iostream>
 #include <stdio.h>
+using namespace std;
 
-int a[100002];
+int a[100001];
 
 int main() {
+  int i;
   int n;
 
-  int i;
-  while (scanf("%d", &n) && n != 0) {
+  while (scanf("%d", &n) != EOF && n) {
     for (i = 1; i <= n; i++) scanf("%d", &a[i]);
 
-    for (i = 1; i <= n; i++)
-      if (a[a[i]] != i) break;
-
-    if (i >= n + 1)
-      printf("ambiguous\n");
-
-    else
-      printf("not ambiguous\n");
+    for (i = 1; i <= n; i++) {
+      if (a[a[i]] != i) {
+        printf("not ambiguous\n");
+        break;
+      }
+    }
+    if (i > n) printf("ambiguous\n");
   }
-
   return 0;
 }
