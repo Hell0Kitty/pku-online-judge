@@ -1,100 +1,132 @@
-
-#include <cstdio>
-#include <cstring>
-#include <algorithm>
+#include<cstdio>
+#include<cmath>
+#include<cstring> 
+#include<queue> 
+#include<algorithm>
+#include<iostream>
+#define N 10000
 using namespace std;
-const int N = 10000;
-int sign[10][6] = {1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0,
-                   1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1,  // 5
-                   1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1,
-                   1, 1, 1, 1, 0, 1};  //光标移动域
-int way[N][8], top;                    //排列与状态、步数
-struct Data {
-  int ar[6], step, state, pos;  //数列，步数，光标状态
+int sign[10][6]=
+{
+    1,0,0,0,0,0,
+    1,1,0,0,0,0,
+    1,1,1,0,0,0,
+    1,1,1,1,0,0,
+    1,1,1,1,1,0,
+    1,1,1,1,1,1,
+    1,0,0,0,0,1,
+    1,1,0,0,0,1,
+    1,1,1,0,0,1,
+    1,1,1,1,0,1
 };
-bool mark[6][6][6][6][6][6][6][10];  // bfs状态集
-void bfs() {
-  Data a, b, stk[N];
-  int f, r;
-  f = r = top = 0;
-  for (int i = 0; i < 6; i++) a.ar[i] = i;
-  a.step = a.state = a.pos = 0;
-  stk[r++] = a;
-  memset(mark, false, sizeof(mark));
-  mark[a.ar[0]][a.ar[1]][a.ar[2]][a.ar[3]][a.ar[4]][a.ar[5]][a.pos][a.state] =
-      true;
-  while (f != r) {
-    a = stk[f++];
-    if (f == N) f = 0;
-    for (int i = 0; i < 6; i++) way[top][i] = a.ar[i];
-    way[top][6] = a.state;
-    way[top++][7] = a.step;
-    b = a;
-    b.step++;
-    if (b.pos > 0) {
-      swap(b.ar[0], b.ar[b.pos]);
-      if (!mark[b.ar[0]][b.ar[1]][b.ar[2]][b.ar[3]][b.ar[4]][b.ar[5]][b.pos]
-               [b.state]) {
-        mark[b.ar[0]][b.ar[1]][b.ar[2]][b.ar[3]][b.ar[4]][b.ar[5]][b.pos]
-            [b.state] = true;
-        stk[r++] = b;
-        if (r == N) r = 0;
-      }
-      swap(b.ar[0], b.ar[b.pos]);
-    }
-    if (b.pos < 5) {
-      int temp = b.state;
-      b.pos++;
-      if (b.pos > b.state || (b.state > 5 && b.pos > b.state - 6)) {
-        if (b.state == 9)
-          b.state = 5;
-        else
-          ++b.state;
-      }
-      if (!mark[b.ar[0]][b.ar[1]][b.ar[2]][b.ar[3]][b.ar[4]][b.ar[5]][b.pos]
-               [b.state]) {
-        mark[b.ar[0]][b.ar[1]][b.ar[2]][b.ar[3]][b.ar[4]][b.ar[5]][b.pos]
-            [b.state] = true;
-        stk[r++] = b;
-        if (r == N) r = 0;
-      }
-      --b.pos;
-      b.state = temp;
-      swap(b.ar[5], b.ar[b.pos]);
-      if (b.state < 5) b.state += 6;
-      if (!mark[b.ar[0]][b.ar[1]][b.ar[2]][b.ar[3]][b.ar[4]][b.ar[5]][b.pos]
-               [b.state]) {
-        mark[b.ar[0]][b.ar[1]][b.ar[2]][b.ar[3]][b.ar[4]][b.ar[5]][b.pos]
-            [b.state] = true;
-        stk[r++] = b;
-        if (r == N) r = 0;
-      }
-    }
-  }
+struct data
+{
+       int num[6],st,sta,pos;
+};
+int vi[6][6][6][6][6][6][6][10];
+int com[N][8];
+char si[7],di[7];
+int a[6],b[6];
+int cnt;
+int check(data & t)
+{
+    return vi[t.num[0]][t.num[1]][t.num[2]][t.num[3]][t.num[4]][t.num[5]][t.pos][t.sta];
 }
-int main() {
-  bfs();
-  int start, end;
-  while (scanf("%d%d", &start, &end) != EOF) {
-    int a[6], b[6];
-    for (int i = 5; i >= 0; i--) {
-      a[i] = start % 10;
-      b[i] = end % 10;
-      start /= 10;
-      end /= 10;
-    }
-    int ans = 1 << 29, st;
-    for (int i = 0, j; i < top; i++) {
-      st = way[i][7];
-      for (j = 0; j < 6; j++) {
-        if (a[way[i][j]] != b[j] && !sign[way[i][6]][j])
-          break;
-        else
-          st += abs(a[way[i][j]] - b[j]);
-      }
-      if (j == 6 && st < ans) ans = st;
-    }
-    printf("%d\n", ans);
-  }
-  return 0;
+void gao(data & t)
+{
+    vi[t.num[0]][t.num[1]][t.num[2]][t.num[3]][t.num[4]][t.num[5]][t.pos][t.sta]=1;
+} 
+void bfs()
+{
+     cnt=0;
+    // memset(vi,0,sizeof(vi));
+     queue<data>q;
+     data s,t;
+     for(int i=0;i<6;i++)
+     s.num[i]=i;
+     s.st=s.sta=s.pos=0;
+     q.push(s);
+     vi[0][1][2][3][4][5][0][0]=1;               
+     while(!q.empty())
+     {
+                      s=q.front();
+                      q.pop();
+                      for(int i=0;i<6;i++)
+                      com[cnt][i]=s.num[i];
+                      com[cnt][6]=s.sta;
+                      com[cnt++][7]=s.st;
+                      t=s;
+                      t.st++;
+                      if(t.pos>0)
+                      {
+                                 swap(t.num[0],t.num[t.pos]);
+                                 if(!check(t))
+                                 {
+                                              gao(t);
+                                              q.push(t);
+                                 }
+                                 swap(t.num[0],t.num[t.pos]);
+                      }
+                      if(t.pos<5)
+                      {
+                                 int tmp=t.sta;
+                                 t.pos++;
+                                 if(t.pos>t.sta||(t.sta>5&&t.pos>t.sta-6)) 
+                                 {
+                                                                         if(t.sta==9)
+                                                                         t.sta=5;
+                                                                         else
+                                                                         t.sta++; 
+                                 }
+                                 if(!check(t)) 
+                                 {
+                                               gao(t);
+                                               q.push(t); 
+                                 }
+                                 t.sta=tmp;
+                                 t.pos--;
+                                 swap(t.num[5],t.num[t.pos]);
+                                 if(t.sta<5)
+                                 {
+                                 t.sta+=6;
+                                 if(t.sta>9)
+                                 t.sta=5; 
+                                 } 
+                                 if(!check(t))
+                                  {
+                                               gao(t);
+                                               q.push(t);
+                                  }
+                      } 
+     }
 }
+int main()
+{
+    bfs();
+    while(~scanf("%s%s",si,di))
+    {
+                               for(int i=0;i<6;i++)
+                               {
+                                       a[i]=si[i]-'0';
+                                       b[i]=di[i]-'0';
+                               }
+                               int ans=9999999;
+                               for(int i=0;i<cnt;i++)
+                               {
+                                       int st=com[i][7],j;
+                                       for(j=0;j<6;j++)
+                                       {
+                                               if(a[com[i][j]]!=b[j]&&sign[com[i][6]][j]==0)
+                                               break;
+                                               st+=abs(a[com[i][j]]-b[j]); 
+                                       }
+                                       if(j==6&&st<ans)
+                                                       ans=st;
+                               } 
+                               printf("%d\n",ans);
+    }
+    return 0;
+}
+
+
+
