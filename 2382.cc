@@ -12,167 +12,118 @@
 
 const double eps = 1e-8;
 
-typedef struct{ 
-
-double x,y,r;
-
-}re;
+typedef struct { double x, y, r; } re;
 
 re p[le];
 
-int N,k,vis[le];
+int N, k, vis[le];
 
 double ans;
 
-double max(double a,double b){
+double max(double a, double b) { return a > b ? a : b; }
 
-    return a > b ? a : b;
+int in_circle(re a, re b) {
+  double x = (a.x - b.x);
 
+  double y = (a.y - b.y);
+
+  double dist = x * x + y * y;
+
+  return (dist < a.r * a.r + eps && sqrt(dist) > a.r - b.r + eps);
 }
 
-int in_circle(re a,re b){
-
-    double x = (a.x - b.x);
-
-    double y = (a.y - b.y);
-
-    double dist = x * x + y * y;
-
-    return (dist < a.r * a.r + eps && sqrt(dist) > a.r - b.r + eps);
-
+double dis(re a, re b) {
+  return sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
 }
 
-double dis(re a,re b){
+int intersect(re a, re b) { return dis(a, b) < a.r + b.r - eps; }
 
-    return sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
+double triangle_area(double r, double r2, double d) {
+  double h = (r + r2 + d) / 2;
 
+  return sqrt(h * (h - r) * (h - r2) * (h - d));
 }
 
-int intersect(re a,re b){
+double in_area(re a, re b) {
+  double d = dis(a, b);
 
-    return dis(a,b) < a.r + b.r - eps;
+  double s = triangle_area(a.r, b.r, d);
 
+  double angle = acos((a.r * a.r + d * d - b.r * b.r) / (2 * a.r * d));
+
+  double angle2 = acos((b.r * b.r + d * d - a.r * a.r) / (2 * b.r * d));
+
+  return angle * a.r * a.r + angle2 * b.r * b.r - 2 * s;
 }
 
-double triangle_area(double r,double r2,double d){
+double area(re a, re b) { return pi * b.r * b.r - in_area(a, b); }
 
-    double h = (r + r2 + d) / 2;
+void input() {
+  int i;
 
-    return sqrt(h * (h - r) * (h - r2) * (h - d));
-
+  for (i = 0; i <= N; i++) scanf("%lf%lf%lf", &p[i].x, &p[i].y, &p[i].r);
 }
 
-double in_area(re a,re b){
+void available() {
+  int i;
 
-    double d = dis(a,b);
+  k = 1;
 
-    double s = triangle_area(a.r,b.r,d);
+  for (i = 1; i <= N; i++)
 
-    double angle  = acos((a.r * a.r + d * d - b.r * b.r) / (2 * a.r * d));
-
-    double angle2 = acos((b.r * b.r + d * d - a.r * a.r) / (2 * b.r * d));
-
-    return angle * a.r * a.r + angle2 * b.r * b.r - 2 * s;
-
+    if (in_circle(p[0], p[i])) p[k++] = p[i];
 }
 
-double area(re a,re b){
+void dfs(int ind, double sum) {
+  int i;
 
-    return pi * b.r * b.r - in_area(a,b);
+  for (i = 1; i < k; i++)
 
+    if (vis[i] && intersect(p[ind], p[i])) return;
+
+  vis[ind] = 1;
+
+  sum += area(p[0], p[ind]);
+
+  ans = max(ans, sum);
+
+  for (i = 1; i < k; i++)
+
+    if (!vis[i]) dfs(i, sum);
+
+  vis[ind] = 0;
 }
 
-void input(){
+void enmue() {
+  int i;
 
-    int i;
+  double sum;
 
-    for(i = 0;i <= N;i++)
+  ans = pi * p[0].r * p[0].r;
 
-        scanf("%lf%lf%lf",&p[i].x,&p[i].y,&p[i].r);
+  for (i = 1; i < k; i++) {
+    memset(vis, 0, sizeof(vis));
 
+    sum = pi * p[0].r * p[0].r;
+
+    dfs(i, sum);
+  }
 }
 
-void available(){
+void deal() {
+  available();
 
-    int i;
+  enmue();
 
-    k = 1;
-
-    for(i = 1;i <= N;i++)
-
-        if(in_circle(p[0],p[i]))
-
-            p[k++] = p[i];
-
+  printf("%.4lf\n", ans);
 }
 
-void dfs(int ind,double sum){
+int main(void) {
+  while (scanf("%d", &N) == 1) {
+    input();
 
-    int i;
+    deal();
+  }
 
-    for(i = 1;i < k;i++)
-
-        if(vis[i] && intersect(p[ind],p[i]))
-
-            return ;
-
-    vis[ind] = 1;
-
-    sum += area(p[0],p[ind]);
-
-    ans = max(ans,sum);
-
-    for(i = 1;i < k;i++)
-
-        if(!vis[i]) dfs(i,sum);
-
-    vis[ind] = 0;
-
+  return 0;
 }
-
-void enmue(){
-
-    int i;
-
-    double sum;
-
-    ans = pi * p[0].r * p[0].r;
-
-    for(i = 1;i < k;i++){
-
-        memset(vis,0,sizeof(vis));
-
-        sum = pi * p[0].r * p[0].r;
-
-        dfs(i,sum);
-
-    }
-
-}
-
-void deal(){
-
-    available();
-
-    enmue();
-
-    printf("%.4lf\n",ans);
-
-}
-
-int main(void){
-
-    while(scanf("%d",&N) == 1){
-
-        input();
-
-        deal();
-
-    }
-
-    return 0;
-
-}
-
-
-
