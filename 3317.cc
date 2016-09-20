@@ -53,7 +53,7 @@ int maxmini(int state, int now, int d, int mi) {
   int ma = -inf, st = state, k, j;
   while (st) {       //枚举所有的1的情况，也就是'.'的情况
     k = st & (-st);  // 找到st倒数第一个1
-    j = mm[k];  // 1的位置
+    j = mm[k];       // 1的位置
     str[pos[j].x][pos[j].y] = '0';
     int t = minimax(state - k, now + p[j], d + 1, ma);
     str[pos[j].x][pos[j].y] = '.';
