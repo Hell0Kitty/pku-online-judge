@@ -76,7 +76,7 @@ int main()
 	    printf("%d does not divide %d!\n",m,n);
     }
     return 0;
-}\
+}
 
 
 
