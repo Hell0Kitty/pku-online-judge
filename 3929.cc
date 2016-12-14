@@ -1,51 +1,45 @@
 #include <stdio.h>
 #include <math.h>
 
-#define	EPS		1E-8
+#define EPS 1E-8
 
-double	h, d, v;
-double	r;
+double h, d, v;
+double r;
 
-double
-getv(double s) {
+double getv(double s) {
+  double _h;
 
-	double	_h;
+  _h = r - s;
 
-	_h = r - s;
-
-	return h * r * r * acos(_h / r) / 3.0 -
-		   _h * h * sqrt(r * r - _h * _h) * 2.0 / 3.0 +
-		   _h * _h * _h * h / r * log(( r + sqrt(r * r - _h * _h) ) / _h) / 3.0;
+  return h * r * r * acos(_h / r) / 3.0 -
+         _h * h * sqrt(r * r - _h * _h) * 2.0 / 3.0 +
+         _h * _h * _h * h / r * log((r + sqrt(r * r - _h * _h)) / _h) / 3.0;
 }
 
-int
-main() {
+int main() {
+  int t;
 
-	int		t;
+  double lft, rht, mid;
 
-	double	lft, rht, mid;
+  scanf("%d", &t);
+  while (t--) {
+    scanf("%lf%lf%lf", &h, &d, &v);
+    r = d / 2.0;
 
-	scanf("%d", &t);
-	while ( t-- ) {
+    lft = 0.0;
+    rht = r;
 
-		scanf("%lf%lf%lf", &h, &d, &v);
-		r = d / 2.0;
+    while (rht - lft > EPS) {
+      mid = (lft + rht) / 2.0;
 
-		lft = 0.0;
-		rht = r;
+      if (getv(mid) < v)
+        lft = mid;
+      else
+        rht = mid;
+    }
 
-		while ( rht - lft > EPS ) {
+    printf("%.5lf\n", d - (lft + rht) / 2.0);
+  }
 
-			mid = ( lft + rht ) / 2.0;
-
-			if ( getv(mid) < v ) lft = mid;
-			else rht = mid;
-		}
-
-		printf("%.5lf\n", d - ( lft + rht ) / 2.0);
-	}
-
-	return 0;
+  return 0;
 }
-
-
