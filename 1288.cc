@@ -20,8 +20,8 @@ void debug() {
 int gcd(int x, int y) { return y ? gcd(y, x % y) : x; }
 int lcm(int x, int y) { return x / gcd(x, y) * y; }
 int dfs(int p, int q)  // 从矩阵下方向上枚举每个x[i]∈{0,1,2}
-                       // 看等式是否成立，当成立时跳上上一行继续枚举，
-                       // 如果当前行无解则返回0
+// 看等式是否成立，当成立时跳上上一行继续枚举，
+// 如果当前行无解则返回0
 {
   int i, j;
   if (p == -1) return 1;
