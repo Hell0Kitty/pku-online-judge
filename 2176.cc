@@ -4,7 +4,7 @@
 using namespace std;
 
 struct Segment {
-  int l, r;  // l是基本模式串的长度，r是重复次数
+  int l, r;     // l是基本模式串的长度，r是重复次数
   char s[101];  //基本模式串
 } dp[101][101];
 
