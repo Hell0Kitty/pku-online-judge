@@ -45,7 +45,7 @@ int Count(vector<Line> v) {
       ans++;
       v[i].b.x = max(v[i - 1].b.x,
                      v[i].b.x);  //注意这一步处理将连在一起的线段延长
-                                 //此时我们只需要记录x延伸的位置而不需要记录y
+      //此时我们只需要记录x延伸的位置而不需要记录y
     }
   }
   return ans;
