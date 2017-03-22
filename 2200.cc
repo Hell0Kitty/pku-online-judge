@@ -47,7 +47,7 @@ bool judge() {
 
   if (p[2].val <= p[3].val && p[2].val <= p[4].val) {
     if (p[3].val >= p[4].val) {  // pos = 4
-      if (p[1].aa != '#') {  // 10
+      if (p[1].aa != '#') {      // 10
         if (p[0].a == 'A')
           return true;
         else
@@ -113,7 +113,7 @@ bool judge() {
         else
           return false;
       }
-    } else {  // pos = 1
+    } else {                 // pos = 1
       if (p[1].aa != '#') {  // 10
         if (p[0].a == 'J')
           return true;
@@ -185,7 +185,7 @@ bool judge() {
 
   if (p[4].val <= p[3].val && p[4].val <= p[2].val) {
     if (p[2].val >= p[3].val) {  // pos = 6
-      if (p[1].aa != '#') {  // 10
+      if (p[1].aa != '#') {      // 10
         if (p[0].a == '3')
           return true;
         else
@@ -251,7 +251,7 @@ bool judge() {
         else
           return false;
       }
-    } else {  // pos = 3
+    } else {                 // pos = 3
       if (p[1].aa != '#') {  // 10
         if (p[0].a == 'K')
           return true;
@@ -323,7 +323,7 @@ bool judge() {
 
   if (p[3].val <= p[2].val && p[3].val <= p[4].val) {
     if (p[2].val >= p[4].val) {  // pos = 5
-      if (p[1].aa != '#') {  // 10
+      if (p[1].aa != '#') {      // 10
         if (p[0].a == '2')
           return true;
         else
@@ -389,7 +389,7 @@ bool judge() {
         else
           return false;
       }
-    } else {  // pos = 2
+    } else {                 // pos = 2
       if (p[1].aa != '#') {  // 10
         if (p[0].a == 'Q')
           return true;
