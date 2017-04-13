@@ -1,58 +1,96 @@
-#include <string>
-#include <cstring>
 #include <cstdio>
-#include <map>
+#include <cstdlib>
+#include <cstring>
+#include <algorithm>
+#include <vector>
+
 using namespace std;
 
-#define MAXNODE 20000  //输入文本每行最多40个结点，40*500
-#define MAXLEN 85
-#define MAXWORD 45
+struct Node;
+struct Cata;
+typedef vector<Cata> vc;
 
-map<string, int> m[MAXNODE];
+struct Cata {
+    char name[10];
+    Node *next;
 
-void preOder_traversal(int midx, int indentation) {
-  for (map<string, int>::iterator i = m[midx].begin(); i != m[midx].end();
-       ++i) {
-    for (int i = 0; i < indentation; ++i) printf(" ");
-    printf("%s\n", (i->first).c_str());
+    bool operator < (const Cata &x) const {
+        return strcmp(name, x.name) < 0;
+    }
+} ;
+struct Node {
+    vc child;
 
-    preOder_traversal(i->second, indentation + 1);
-  }
+    Node() {
+        child.clear();
+    }
+} *Root;
+
+void insert(char *p) {
+    char tmp[10];
+    char *q = tmp;
+    Node *cur = Root;
+    Cata buf;
+    vc::iterator ii;
+
+    while (true) {
+        while (*p && *p != '\\') {
+            *q = *p;
+            q++, p++;
+        }
+        *q = 0;
+
+        for (ii = cur->child.begin(); ii != cur->child.end(); ii++) {
+            if (!strcmp((*ii).name, tmp)) {
+                if (!(*ii).next) {
+                    (*ii).next = new Node();
+                }
+                cur = (*ii).next;
+                break;
+            }
+        }
+        if (ii == cur->child.end()) {
+            buf.next = new Node();
+            strcpy(buf.name, tmp);
+            cur->child.push_back(buf);
+            cur = buf.next;
+
+        }
+
+        if (*p) {
+            q = tmp;
+            p++;
+        } else {
+            break;
+        }
+    }
+}
+
+void print(int depth, Node *rt) {
+    if (!rt) return ;
+
+    vc::iterator ii;
+
+    sort(rt->child.begin(), rt->child.end());
+    for (ii = rt->child.begin(); ii != rt->child.end(); ii++) {
+        for (int i = 0; i < depth; i++) {
+            putchar(' ');
+        }
+        puts((*ii).name);
+        print(depth + 1, (*ii).next);
+    }
 }
 
 int main() {
-  int n, i, j, midx, midx_counter = 0;
-  char str[MAXLEN];
-  int word_init[MAXWORD];
-  string current_str;
-
-  scanf("%d", &n);
-
-  while (n--) {
-    scanf("%s", str);
-    word_init[0] = 0;
-    j = 1;
-    for (i = 0; str[i]; ++i) {
-      if (str[i] == '\\') {
-        str[i] = 0;
-        word_init[j++] = i + 1;  //第j个单词从str[i+1]开始
-      }
+    char buf[100];
+    int n;
+    while (~scanf("%d", &n)) {
+        Root = new Node();
+        while (n--) {
+            scanf("%s", buf);
+            insert(buf);
+        }
+        print(0, Root);
     }
-
-    midx = 0;
-    for (i = 0; i < j; ++i) {
-      current_str = str + word_init[i];
-
-      if (!m[midx].count(current_str))  //新结点
-      {
-        m[midx][current_str] = (++midx_counter);
-      }
-
-      midx = m[midx][current_str];
-    }
-  }
-
-  preOder_traversal(0, 0);
-
-  return 0;
+    return 0;
 }
