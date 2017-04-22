@@ -12,9 +12,9 @@ using namespace std;
 int N;
 int cost[MAX_N][MAX_N];    // 串i连接串j的长度的增量
 int D[1 << MAX_N][MAX_N];  // D[字串集合][串j] :=
-                           // 集合尾部为j时的累计长度的最小值（也就是花费）
+// 集合尾部为j时的累计长度的最小值（也就是花费）
 bool reachable[1 << MAX_N][MAX_N];  // reachable[S][j] :=
-                                    // 既定集合（已经拼成固定的序列了）能够拼上j
+// 既定集合（已经拼成固定的序列了）能够拼上j
 string piece[MAX_N];  // 序列
 
 /**
