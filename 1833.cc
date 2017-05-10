@@ -10,26 +10,17 @@ using namespace std;
 
 int f[maxn];
 
-int main()
-{
-    int t;
-    scanf("%d", &t);
-    while (t--)
-    {
-        int n, k;
-        scanf("%d%d", &n, &k);
-        for (int i = 0; i < n; i++)
-            scanf("%d", &f[i]);
-        while (k--)
-            next_permutation(f, f + n);
-        printf("%d", f[0]);
-        for (int i = 1; i < n; i++)
-            printf(" %d", f[i]);
-        printf("\n");
-    }
-    return 0;
+int main() {
+  int t;
+  scanf("%d", &t);
+  while (t--) {
+    int n, k;
+    scanf("%d%d", &n, &k);
+    for (int i = 0; i < n; i++) scanf("%d", &f[i]);
+    while (k--) next_permutation(f, f + n);
+    printf("%d", f[0]);
+    for (int i = 1; i < n; i++) printf(" %d", f[i]);
+    printf("\n");
+  }
+  return 0;
 }
-
-
-
-
