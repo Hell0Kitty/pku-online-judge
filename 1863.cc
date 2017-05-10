@@ -13,7 +13,7 @@ inline void swap(char &a, char &b)  //交换字符
   tmp = a, a = b, b = tmp;
 }
 void get_Adjacent(char t[], int x)  //得到t相邻的数
-{  // x = -1减，x = 1加1;
+{                                   // x = -1减，x = 1加1;
   char s[MAXN];
   int i, flag = 0, len = strlen(t);
   for (i = 0; i <= len; i++) s[i] = t[i];
