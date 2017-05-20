@@ -1,30 +1,40 @@
 #include <iostream>
-#include <stdio.h>
-#include <string.h>
-#include <math.h>
-#include <time.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 using namespace std;
-int n;
-int c[15] = {1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880};
-int main() {
-  while (scanf("%d", &n) != EOF && (n >= 0)) {
-    if (n == 0 || n > 409114 || (n > 46234 && n < 362880) ||
-        (n > 5914 && n < 40320) || (n > 874 && n < 5040) ||
-        (n > 154 && n < 720) || (n > 34 && n < 120) || (n > 10 && n < 24)) {
-      printf("NO\n");
-      continue;
+
+int fac[20];
+bool f[1000005];
+int tot;
+
+void dfs(int i, int sum)
+{
+    if (sum > 1000000)
+        return;
+    f[sum] = true;
+    if (i == tot)
+        return;
+    dfs(i + 1, sum + fac[i]);
+    dfs(i + 1, sum);
+}
+
+int main()
+{
+    fac[0] = 1;
+    tot = 0;
+    for (int i = 1; fac[i - 1] <= 1000000; i++)
+    {
+        fac[i] = fac[i - 1] * i;
+        tot++;
     }
-    int p = 9;
-    while (n > 0 && p >= 0) {
-      if (n >= c[p]) {
-        n -= c[p];
-      }
-      p--;
-    }
-    if (n == 0)
-      printf("YES\n");
-    else
-      printf("NO\n");
-  }
-  return 0;
+    memset(f, 0, sizeof(f));
+    dfs(0, 0);
+    int n;
+    while (scanf("%d", &n), n >= 0)
+        if (f[n] && n != 0)
+            printf("YES\n");
+        else
+            printf("NO\n");
+    return 0;
 }
