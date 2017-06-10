@@ -11,17 +11,11 @@ using namespace std;
 int n;
 int f[maxn];
 
-int main()
-{
-    scanf("%d", &n);
-    for (int i = 0; i < n; i++)
-        scanf("%d", &f[i]);
-    sort(f, f + n);
-    double ans = f[n - 1];
-    for (int i = n - 2; i >= 0; i--)
-        ans = 2 * sqrt(ans * f[i]);
-    printf("%.3f\n", ans);
+int main() {
+  scanf("%d", &n);
+  for (int i = 0; i < n; i++) scanf("%d", &f[i]);
+  sort(f, f + n);
+  double ans = f[n - 1];
+  for (int i = n - 2; i >= 0; i--) ans = 2 * sqrt(ans * f[i]);
+  printf("%.3f\n", ans);
 }
-
-
-
