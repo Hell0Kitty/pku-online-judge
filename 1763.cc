@@ -4,8 +4,8 @@
 #include <algorithm>
 typedef struct {
   int num;  //编号，从0开始
-  int x;  // x坐标
-  int y;  // y坐标
+  int x;    // x坐标
+  int y;    // y坐标
 } Point;
 
 int n;
