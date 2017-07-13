@@ -2,23 +2,16 @@
 
 using namespace std;
 
-int main(){
+int main() {
+  int n, a, b;
 
-                int n, a, b;
+  cin >> n;
 
-                cin >> n;
+  while (n-- > 0) {
+    cin >> a >> b;
 
-                while(n-- > 0){
+    cout << (a < b ? "NO BRAINS\n" : "MMM BRAINS\n");
+  }
 
-                                cin >> a >> b;
-
-                                cout << (a<b?"NO BRAINS\n":"MMM BRAINS\n");
-
-                }
-
-                return 0;
-
+  return 0;
 }
-
-
-
