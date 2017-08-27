@@ -4,11 +4,11 @@
 
 #include <algorithm>
 
-#define MAX(a,b) (a>b?a:b)
+#define MAX(a, b) (a > b ? a : b)
 
-#define ABS(a) ((a)>0?(a):-1*(a))
+#define ABS(a) ((a) > 0 ? (a) : -1 * (a))
 
-#define TK(a) (a&(a^(a-1)))
+#define TK(a) (a & (a ^ (a - 1)))
 
 #define N 20005
 
@@ -16,93 +16,74 @@ using namespace std;
 
 struct Node
 
-{
-
-    long long v,x;
-
-    bool operator<(const Node & a)const
-
     {
+  long long v, x;
 
-        return v<a.v;
+  bool operator<(const Node& a) const
 
-    }
+  {
+    return v < a.v;
+  }
 
-}node[N];
+} node[N];
 
 long long num[2][N];
 
-long long rsum(int pos,int d)
+long long rsum(int pos, int d)
 
 {
+  long long ans = 0;
 
-    long long ans=0;
+  while (pos > 0)
 
-    while(pos>0)
+  {
+    ans += num[d][pos];
 
-    {
+    pos -= TK(pos);
+  }
 
-        ans+=num[d][pos];
-
-        pos-=TK(pos);
-
-    }
-
-    return ans;
-
+  return ans;
 }
 
-void toput(int pos,long long v,int d)
+void toput(int pos, long long v, int d)
 
 {
+  while (pos <= 20000)
 
-    while(pos<=20000)
+  {
+    num[d][pos] += v;
 
-    {
-
-        num[d][pos]+=v;
-
-        pos+=TK(pos);
-
-    }
-
+    pos += TK(pos);
+  }
 }
 
 int main()
 
 {
+  int n;
 
-    int n;
+  scanf("%d", &n);
 
-    scanf("%d",&n);
+  memset(num, 0, sizeof(num));
 
-    memset(num,0,sizeof(num));
+  for (int i = 1; i <= n; i++) scanf("%lld%lld", &node[i].v, &node[i].x);
 
-    for(int i=1;i<=n;i++)
+  sort(node + 1, node + 1 + n);
 
-        scanf("%lld%lld",&node[i].v,&node[i].x);
+  long long ans = 0;
 
-    sort(node+1,node+1+n);
+  for (int i = 1; i <= n; i++)
 
-    long long ans=0;
+  {
+    long long a = rsum(node[i].x, 0), b = rsum(node[i].x, 1);
 
-    for(int i=1;i<=n;i++)
+    ans += (node[i].x * a - b + rsum(20000, 1) - b - (i - 1 - a) * node[i].x) *
+           node[i].v;
 
-    {
+    toput(node[i].x, 1, 0);
 
-        long long a=rsum(node[i].x,0),b=rsum(node[i].x,1);
+    toput(node[i].x, node[i].x, 1);
+  }
 
-        ans+=(node[i].x*a-b+rsum(20000,1)-b-(i-1-a)*node[i].x)*node[i].v;
-
-        toput(node[i].x,1,0);
-
-        toput(node[i].x,node[i].x,1);
-
-    }
-
-    printf("%lld\n",ans);
-
+  printf("%lld\n", ans);
 }
-
-
-
