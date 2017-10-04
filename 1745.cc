@@ -1,60 +1,36 @@
+#include <iostream>
+using namespace std;
+int dp[10001][101]={0};//dp表示的为dp[i][j]前i个数是否能够组成余数为j，是则为1
+int num[10000];
+int main()
+{
+  int i,j;
+  int n , k;
+  scanf("%d%d",&n,&k);
 
-#include <stdio.h>
-#include <memory.h>
-#include <math.h>
+  for(i = 0; i < n ; i++)
+  {
+    scanf("%d",&num[i]);
+    if(num[i]<0)
+      num[i]= -num[i];
+    num[i] = num[i]%k;
+  }
+  dp[0][num[0]] = 1;
+  for(i = 1 ; i <n ; i++ )
+  {
+    for(j = 0 ; j <=k ; j++)
+      if(dp[i-1][j])
+      {
+        dp[i][(j+num[i])%k] = 1;
+        dp[i][(k+j-num[i])%k] = 1;//注意这里
 
-#define maxBound 20005
-#define kBound 205
-int array[maxBound];
-int ncase, k;
-bool dp[maxBound][kBound];
-
-int modfunc(int i, int j) {
-  if (i >= 0) return i % j;
-
-  return abs(i) % j;
-}
-
-void answer() {
-  memset(dp, 0, sizeof(dp));
-  dp[1][array[1]] = true;
-  for (int i = 1; i <= ncase - 1; i++) {
-    for (int j = 0; j <= k - 1; j++) {
-      if (dp[i][j]) {
-        int temp = modfunc(j + array[i + 1], k);
-        dp[i + 1][temp] = true;
-        dp[i + 1][modfunc(j - array[i + 1], k)] = true;
       }
-    }
-  }
 
-  if (dp[ncase][0]) {
-    printf("Divisible\n");
-  } else {
-    printf("Not divisible\n");
   }
-  //  for (int i = 1 ;i <= ncase;i++)
-  //  {
-  //    for (int j = 1; j<= k;j++)
-  //    {
-  //      printf("%d ", dp[i][j]);
-  //    }
-  //    puts("");
-  //  }
-}
-int main() {
-  scanf("%d%d", &ncase, &k);
-  for (int i = 1; i <= ncase; i++) {
-    int temp;
-    scanf("%d", &temp);
-    array[i] = modfunc(temp, k);
-  }
-  //  for (int i = 1; i<= ncase;i++)
-  //  {
-  //    printf("%d ", array[i]);
-  //  }
-  //  puts("");
-  answer();
+  if(dp[n-1][0])
+     printf("Divisible\n");
+    else
+        printf("Not divisible\n");
+    return 0;
 
-  return 0;
 }
