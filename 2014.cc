@@ -7,7 +7,7 @@ int main() {
   int x;
   int y;
 
-  int totalwidth;  // for all
+  int totalwidth;   // for all
   int totalheight;  // for all
 
   cin >> limitwidth;
@@ -16,7 +16,7 @@ int main() {
     totalwidth = 0;
     totalheight = 0;
 
-    int sumwidthforeachline = 0;  // for each line
+    int sumwidthforeachline = 0;   // for each line
     int maxheightforeachline = 0;  // for each line
 
     cin >> x >> y;
