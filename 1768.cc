@@ -175,7 +175,7 @@ int main() {
           jz.push_back(can2[i]);  //从这点开始扫描有影响的状态
           continue;
         }
-        if (strcmp(*(save + i), "SET"))  // set命令不影响
+        if (strcmp(*(save + i), "SET"))     // set命令不影响
           hav[can1[i]].push_back(can2[i]);  //寄存器2能影响寄存器1
       }
     }
