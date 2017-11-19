@@ -1,5 +1,5 @@
 #include <stdio.h>
-int main() {  // n：总共有多少人k：一张照片里有多少人a[20]：存给出照片状态
+int main() {                               // n：总共有多少人k：一张照片里有多少人a[20]：存给出照片状态
   int t, i, i2, j, n, k, a[20], ans, sum;  // ans：最终结果sum：中间结果
   scanf("%d", &t);  // t：testcase、i，i2，j：计数器
   for (j = 1; j <= t; j++) {
