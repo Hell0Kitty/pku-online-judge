@@ -1,97 +1,84 @@
-#include<cstdio>
+#include <cstdio>
 
-#include<cstring>
+#include <cstring>
 
 using namespace std;
 
 int main()
 
 {
+  int T;
 
-    int T;
+  for (scanf("%d ", &T); T; T--)
 
-    for(scanf("%d ",&T); T; T--)
+  {
+    char s[1000];
+
+    char ans[1000];
+
+    int st[1000];
+
+    gets(s);
+
+    int len, i, j, num = 0;
+
+    for (i = j = 0; s[i]; i++)
 
     {
+      if (s[i] == ' ')
 
-        char s[1000];
+        continue;
 
-        char ans[1000];
+      else if (s[i] == '(')
 
-        int st[1000];
+      {
+        if (j > 0 && ans[j - 1] != '+' && ans[j - 1] != '(')
 
-        gets(s);
+          ans[j++] = '(', st[num++] = 1;
 
-        int len,i,j,num=0;
+        else
 
-        for(i=j=0; s[i]; i++)
+          st[num++] = -1;
+
+      }
+
+      else if (s[i] == ')')
+
+      {
+        if (st[num - 1] == -1)
+
+          num--;
+
+        else if (ans[j - 1] == '(' || (j - 2 >= 0 && ans[j - 2] == '('))
 
         {
+          if (ans[j - 1] == '(')
 
-            if(s[i]==' ')
+            j--;
 
-                continue;
+          else
 
-            else if(s[i]=='(')
+            ans[j - 2] = ans[j - 1], j--;
 
-            {
-
-                if(j>0&&ans[j-1]!='+'&&ans[j-1]!='(')
-
-                    ans[j++]='(',st[num++]=1;
-
-                else
-
-                    st[num++]=-1;
-
-            }
-
-            else if(s[i]==')')
-
-            {
-
-                if(st[num-1]==-1)
-
-                    num--;
-
-                else if(ans[j-1]=='('||(j-2>=0&&ans[j-2]=='('))
-
-                {
-
-                    if(ans[j-1]=='(')
-
-                        j--;
-
-                    else
-
-                        ans[j-2]=ans[j-1],j--;
-
-                    num--;
-
-                }
-
-                else
-
-                    ans[j++]=')',num--;
-
-            }
-
-            else
-
-                ans[j++]=s[i];
+          num--;
 
         }
 
-        ans[j]='\0';
+        else
 
-        puts(ans);
+          ans[j++] = ')', num--;
 
+      }
+
+      else
+
+        ans[j++] = s[i];
     }
 
-    return 0;
+    ans[j] = '\0';
 
+    puts(ans);
+  }
+
+  return 0;
 }
-
-
-
-
